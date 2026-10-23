@@ -30,17 +30,27 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: true });
 
   if (mobileToggle && navMenu) {
-    mobileToggle.addEventListener('click', () => {
-      playPopSound(480);
-      navMenu.classList.toggle('open');
-      const expanded = navMenu.classList.contains('open');
+    mobileToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const expanded = navMenu.classList.toggle('open');
+      mobileToggle.classList.toggle('open', expanded);
       mobileToggle.setAttribute('aria-expanded', expanded);
     });
 
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
         navMenu.classList.remove('open');
+        mobileToggle.classList.remove('open');
+        mobileToggle.setAttribute('aria-expanded', 'false');
       });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (navMenu.classList.contains('open') && !navMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
+        navMenu.classList.remove('open');
+        mobileToggle.classList.remove('open');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+      }
     });
   }
 
