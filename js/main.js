@@ -411,16 +411,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     else if (type === 'hall') {
       modalDemoContainer.innerHTML = `
-        <div class="hall-blueprint-container">
-          <!-- Top Architectural Status Bar -->
+        <div class="hall-blueprint-container hall-3d-experience">
+          <!-- Top 3D Telemetry & Controls Bar -->
           <div class="blueprint-meta-bar">
             <div class="blueprint-tag-cluster">
-              <span class="blueprint-pill highlight">📐 CAD SEATING BLUEPRINT v2.6</span>
-              <span class="blueprint-pill">FLOOR-PLAN [TIER-1 ARCHITECTURE]</span>
+              <span class="blueprint-pill highlight">✨ 3D ISOMETRIC VENUE ARENA</span>
+              <span class="blueprint-pill">CAD ARCHITECTURE MODEL v3.0</span>
             </div>
             <div class="blueprint-live-indicator">
               <span class="pulse-cyan-dot"></span>
-              <span>INTERACTIVE SEAT SELECTOR</span>
+              <span>LIVE ORBITAL 3D VIEWPORT</span>
+            </div>
+          </div>
+
+          <!-- Camera & 3D Perspective Control Toolbar -->
+          <div class="arena-3d-toolbar">
+            <div class="camera-mode-group" role="group" aria-label="3D Camera Presets">
+              <button type="button" class="cam-btn active" id="btn-cam-iso" title="Switch to 3D Isometric View">
+                🏛️ 3D Isometric
+              </button>
+              <button type="button" class="cam-btn" id="btn-cam-stage" title="Switch to Front Stage Perspective">
+                🎭 Stage Perspective
+              </button>
+              <button type="button" class="cam-btn" id="btn-cam-top" title="Switch to Top-Down 2D CAD Plan">
+                📐 Top-Down CAD
+              </button>
+              <button type="button" class="cam-btn auto-rotate" id="btn-cam-spin" title="Toggle Continuous 360° Turntable Auto-Rotation">
+                🔄 Auto-Spin
+              </button>
+            </div>
+            <div class="camera-drag-hint">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+              </svg>
+              <span>Click &amp; drag arena to orbit 3D camera</span>
             </div>
           </div>
 
@@ -442,68 +466,97 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
 
             <div class="blueprint-field">
-              <label class="blueprint-label">Time &amp; Session Window:</label>
+              <label class="blueprint-label">Session Slot &amp; Timeline:</label>
               <select id="hall-slot-select" class="blueprint-select">
                 <option value="morning" data-multiplier="1.0">Morning Session (8:00 AM – 1:00 PM)</option>
-                <option value="evening" data-multiplier="1.25" selected>Evening Banquet (4:00 PM – 10:00 PM)</option>
+                <option value="evening" data-multiplier="1.25" selected>Evening Gala &amp; Banquet (4:00 PM – 10:00 PM)</option>
                 <option value="fullday" data-multiplier="1.75">Full Day Tech Summit (8:00 AM – 10:00 PM)</option>
               </select>
             </div>
           </div>
 
-          <!-- 2D Interactive Seating Layout Canvas -->
-          <div class="blueprint-canvas" id="blueprint-canvas-area">
-            <!-- Stage / Keynote Proscenium Arch -->
-            <div class="blueprint-stage-area">
-              <div class="stage-platform">
-                <span class="stage-icon">🎙️</span>
-                <span class="stage-text">KEYNOTE STAGE &amp; PROSCENIUM ARCH</span>
-              </div>
-              <div class="stage-spotlight-beam"></div>
-            </div>
+          <!-- 3D Isometric Arena Viewport -->
+          <div class="arena-viewport-3d" id="arena-viewport-3d">
+            <!-- 3D Orbiting World Plane -->
+            <div class="arena-world-3d" id="arena-world-3d">
+              <!-- Holographic Grid Floor Plane -->
+              <div class="arena-floor-plane"></div>
 
-            <!-- Seating Map Legend -->
+              <!-- Volumetric Sweeping Spotlights -->
+              <div class="spotlight-beam-3d beam-left" aria-hidden="true"></div>
+              <div class="spotlight-beam-3d beam-right" aria-hidden="true"></div>
+
+              <!-- Elevated 3D Proscenium Stage (Z: 36px) -->
+              <div class="stage-structure-3d">
+                <div class="stage-backdrop-screen">
+                  <span class="screen-text">4K ULTRA-WIDE PROSCENIUM WALL</span>
+                </div>
+                <div class="stage-wood-deck">
+                  <div class="stage-podium-3d">
+                    <span class="podium-mic-icon">🎙️</span>
+                    <span class="podium-title">KEYNOTE PODIUM</span>
+                  </div>
+                </div>
+                <div class="stage-face-front"></div>
+                <div class="stage-rim-glow"></div>
+              </div>
+
+              <!-- 3D Seating Risers -->
+              <!-- Tier A: VIP Ground Level Pods (Z: 10px) -->
+              <div class="riser-tier-3d tier-a-wrap">
+                <div class="riser-header-3d">
+                  <span class="tier-badge-3d vip">ZONE A • VIP EXECUTIVE SEATING ($45/SEAT)</span>
+                </div>
+                <div class="seats-matrix-3d zone-a-3d" id="zone-a-3d-grid"></div>
+              </div>
+
+              <!-- Tier B: Delegate Conference Platform Riser (Z: 28px) -->
+              <div class="riser-tier-3d tier-b-wrap">
+                <div class="riser-step-face b-face"></div>
+                <div class="riser-header-3d">
+                  <span class="tier-badge-3d delegate">ZONE B • DELEGATE CONFERENCE RISER ($25/SEAT)</span>
+                </div>
+                <div class="seats-matrix-3d zone-b-3d" id="zone-b-3d-grid"></div>
+              </div>
+
+              <!-- Tier C: Stadium Assembly Gallery Riser (Z: 52px) -->
+              <div class="riser-tier-3d tier-c-wrap">
+                <div class="riser-step-face c-face"></div>
+                <div class="riser-header-3d">
+                  <span class="tier-badge-3d assembly">ZONE C • AUDITORIUM GALLERY RISER ($15/SEAT)</span>
+                </div>
+                <div class="seats-matrix-3d zone-c-3d" id="zone-c-3d-grid"></div>
+              </div>
+
+              <!-- Floating 3D Telemetry HUD (Z: 85px) -->
+              <div class="floating-hud-3d">
+                <div class="hud-chip">
+                  <span class="hud-glow-dot"></span>
+                  <span id="hud-camera-angle">CAM: 56°X / -36°Z</span>
+                </div>
+                <div class="hud-chip highlight">
+                  <span id="hud-seats-telemetry">SEATS: 4 SELECTED</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3D Legend & Presets -->
+          <div class="blueprint-legend-row">
             <div class="blueprint-legend">
               <div class="legend-item"><span class="legend-swatch available"></span> Available</div>
-              <div class="legend-item"><span class="legend-swatch selected"></span> Selected</div>
+              <div class="legend-item"><span class="legend-swatch selected"></span> Selected (Laser Beam 3D)</div>
               <div class="legend-item"><span class="legend-swatch reserved"></span> Reserved</div>
-              <div class="legend-item"><span class="legend-badge vip">VIP Tier ($45)</span></div>
+              <div class="legend-item"><span class="legend-badge vip">VIP ($45)</span></div>
               <div class="legend-item"><span class="legend-badge delegate">Delegate ($25)</span></div>
               <div class="legend-item"><span class="legend-badge assembly">Assembly ($15)</span></div>
             </div>
 
-            <!-- Zone A: VIP Front Row Roundtables -->
-            <div class="seating-zone-block">
-              <div class="zone-header">
-                <span class="zone-title">ZONE A — VIP EXECUTIVE PODS ($45 / Seat)</span>
-                <span class="zone-desc">Front-row acoustic focal point with luxury armchairs</span>
-              </div>
-              <div class="seats-row zone-a-seats" id="zone-a-container"></div>
-            </div>
-
-            <!-- Zone B: Delegate Conference Seating -->
-            <div class="seating-zone-block">
-              <div class="zone-header">
-                <span class="zone-title">ZONE B — DELEGATE CONFERENCE TIERS ($25 / Seat)</span>
-                <span class="zone-desc">Tiered mid-hall seating with charging hubs &amp; desk mounts</span>
-              </div>
-              <div class="seats-row zone-b-seats" id="zone-b-container"></div>
-            </div>
-
-            <!-- Zone C: General Assembly / Gallery -->
-            <div class="seating-zone-block">
-              <div class="zone-header">
-                <span class="zone-title">ZONE C — AUDITORIUM GALLERY ($15 / Seat)</span>
-                <span class="zone-desc">Elevated stadium gallery with panoramic stage sightlines</span>
-              </div>
-              <div class="seats-row zone-c-seats" id="zone-c-container"></div>
-            </div>
-
             <!-- Quick Preset Action Toolbar -->
             <div class="blueprint-presets-toolbar">
-              <span class="presets-label">Quick Presets:</span>
-              <button type="button" class="preset-btn" id="btn-preset-vip">Select VIP Pods (Zone A)</button>
-              <button type="button" class="preset-btn" id="btn-preset-delegate">Select Delegate Block</button>
+              <span class="presets-label">Presets:</span>
+              <button type="button" class="preset-btn" id="btn-preset-vip">Front Row VIP (8 Seats)</button>
+              <button type="button" class="preset-btn" id="btn-preset-delegate">Delegate Block (6 Seats)</button>
               <button type="button" class="preset-btn" id="btn-preset-all">Select All Available</button>
               <button type="button" class="preset-btn reset" id="btn-preset-clear">Clear Seats</button>
             </div>
@@ -605,20 +658,169 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 'C16', zone: 'C', name: 'Assembly C16', price: 15, status: 'available' }
       ];
 
-      // Pre-select 4 premium seats so the interactive CAD model is instantly active
+      // Pre-select 4 premium seats
       const selectedSeats = new Set(['A1', 'A2', 'B4', 'B5']);
 
-      const zoneAContainer = document.getElementById('zone-a-container');
-      const zoneBContainer = document.getElementById('zone-b-container');
-      const zoneCContainer = document.getElementById('zone-c-container');
+      const zoneAGrid = document.getElementById('zone-a-3d-grid');
+      const zoneBGrid = document.getElementById('zone-b-3d-grid');
+      const zoneCGrid = document.getElementById('zone-c-3d-grid');
       const venueSelect = document.getElementById('hall-venue-select');
       const slotSelect = document.getElementById('hall-slot-select');
       const addonVideoWall = document.getElementById('addon-video-wall');
       const addonSoundRig = document.getElementById('addon-sound-rig');
       const addonBuffet = document.getElementById('addon-buffet');
 
-      function renderSeatButtons() {
-        const createBtn = (seat) => {
+      // -----------------------------------------------------------------------
+      // Interactive 3D Camera Orbit Engine
+      // -----------------------------------------------------------------------
+      const arenaViewport = document.getElementById('arena-viewport-3d');
+      const arenaWorld = document.getElementById('arena-world-3d');
+      const hudAngle = document.getElementById('hud-camera-angle');
+      const hudSeatsTelemetry = document.getElementById('hud-seats-telemetry');
+
+      let rotX = 56;
+      let rotZ = -36;
+      let isDragging = false;
+      let startMouseX = 0;
+      let startMouseY = 0;
+      let isAutoSpinning = false;
+      let spinAnimId = null;
+
+      function applyArenaTransform() {
+        if (!arenaWorld) return;
+        arenaWorld.style.transform = `rotateX(${rotX}deg) rotateZ(${rotZ}deg)`;
+        if (hudAngle) {
+          hudAngle.textContent = `CAM: ${Math.round(rotX)}°X / ${Math.round(rotZ)}°Z`;
+        }
+      }
+
+      function setCameraPreset(newX, newZ, activeBtnId) {
+        stopAutoSpin();
+        document.querySelectorAll('.cam-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(activeBtnId)?.classList.add('active');
+        rotX = newX;
+        rotZ = newZ;
+        if (arenaWorld) {
+          arenaWorld.style.transition = 'transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1)';
+          applyArenaTransform();
+          setTimeout(() => {
+            if (arenaWorld) arenaWorld.style.transition = '';
+          }, 600);
+        }
+      }
+
+      function startAutoSpin() {
+        if (isAutoSpinning) return;
+        isAutoSpinning = true;
+        document.querySelectorAll('.cam-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('btn-cam-spin')?.classList.add('active');
+
+        function spinLoop() {
+          if (!isAutoSpinning) return;
+          rotZ = (rotZ + 0.35) % 360;
+          applyArenaTransform();
+          spinAnimId = requestAnimationFrame(spinLoop);
+        }
+        spinAnimId = requestAnimationFrame(spinLoop);
+      }
+
+      function stopAutoSpin() {
+        isAutoSpinning = false;
+        if (spinAnimId) {
+          cancelAnimationFrame(spinAnimId);
+          spinAnimId = null;
+        }
+        document.getElementById('btn-cam-spin')?.classList.remove('active');
+      }
+
+      // Camera Toolbar Buttons
+      document.getElementById('btn-cam-iso')?.addEventListener('click', () => {
+        playPopSound(500);
+        setCameraPreset(56, -36, 'btn-cam-iso');
+      });
+
+      document.getElementById('btn-cam-stage')?.addEventListener('click', () => {
+        playPopSound(520);
+        setCameraPreset(74, 0, 'btn-cam-stage');
+      });
+
+      document.getElementById('btn-cam-top')?.addEventListener('click', () => {
+        playPopSound(480);
+        setCameraPreset(0, 0, 'btn-cam-top');
+      });
+
+      document.getElementById('btn-cam-spin')?.addEventListener('click', () => {
+        playPopSound(600);
+        if (isAutoSpinning) {
+          stopAutoSpin();
+          setCameraPreset(56, -36, 'btn-cam-iso');
+        } else {
+          startAutoSpin();
+        }
+      });
+
+      // Mouse Drag to Orbit in 3D Space
+      if (arenaViewport) {
+        arenaViewport.addEventListener('mousedown', (e) => {
+          // If clicking a seat button, allow seat selection without dragging
+          if (e.target.closest('.seat-3d-item')) return;
+          isDragging = true;
+          startMouseX = e.clientX;
+          startMouseY = e.clientY;
+          stopAutoSpin();
+          arenaViewport.style.cursor = 'grabbing';
+        });
+
+        window.addEventListener('mousemove', (e) => {
+          if (!isDragging) return;
+          const deltaX = e.clientX - startMouseX;
+          const deltaY = e.clientY - startMouseY;
+          startMouseX = e.clientX;
+          startMouseY = e.clientY;
+
+          rotZ += deltaX * 0.45;
+          rotX = Math.max(0, Math.min(84, rotX - deltaY * 0.35));
+          applyArenaTransform();
+        });
+
+        window.addEventListener('mouseup', () => {
+          if (isDragging) {
+            isDragging = false;
+            arenaViewport.style.cursor = '';
+          }
+        });
+
+        // Touch support for mobile
+        arenaViewport.addEventListener('touchstart', (e) => {
+          if (e.target.closest('.seat-3d-item')) return;
+          if (e.touches.length === 1) {
+            isDragging = true;
+            startMouseX = e.touches[0].clientX;
+            startMouseY = e.touches[0].clientY;
+            stopAutoSpin();
+          }
+        }, { passive: true });
+
+        window.addEventListener('touchmove', (e) => {
+          if (!isDragging || e.touches.length !== 1) return;
+          const deltaX = e.touches[0].clientX - startMouseX;
+          const deltaY = e.touches[0].clientY - startMouseY;
+          startMouseX = e.touches[0].clientX;
+          startMouseY = e.touches[0].clientY;
+
+          rotZ += deltaX * 0.45;
+          rotX = Math.max(0, Math.min(84, rotX - deltaY * 0.35));
+          applyArenaTransform();
+        }, { passive: true });
+
+        window.addEventListener('touchend', () => { isDragging = false; });
+      }
+
+      // -----------------------------------------------------------------------
+      // Render Volumetric 3D Seats with Laser Light Pillars
+      // -----------------------------------------------------------------------
+      function render3DSeatButtons() {
+        const create3DSeatBtn = (seat) => {
           const isSelected = selectedSeats.has(seat.id);
           const isReserved = seat.status === 'reserved';
           const zoneClass = seat.zone === 'A' ? 'vip' : seat.zone === 'B' ? 'delegate' : 'assembly';
@@ -629,22 +831,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
           return `
             <button type="button" 
-              class="seat-btn ${zoneClass} ${stateClass}" 
+              class="seat-3d-item ${zoneClass} ${stateClass}" 
               data-seat-id="${seat.id}"
-              ${isReserved ? 'disabled title="Seat ' + seat.id + ' is already reserved"' : 'title="Seat ' + seat.id + ' • ' + seat.name + ' • $' + seat.price + '"'}
+              ${isReserved ? 'disabled title="Seat ' + seat.id + ' is Reserved"' : 'title="Seat ' + seat.id + ' • ' + seat.name + ' • $' + seat.price + '"'}
               aria-label="${seat.name}, $${seat.price}, ${stateClass}">
-              <span class="seat-id-txt">${seat.id}</span>
-              <span class="seat-pip"></span>
+              <!-- 3D Backrest Plane -->
+              <span class="seat-backrest-3d"></span>
+              <!-- 3D Cushion Top -->
+              <span class="seat-cushion-3d">
+                <span class="seat-label-3d">${seat.id}</span>
+                <span class="seat-status-dot"></span>
+              </span>
+              <!-- 3D Pedestal Base -->
+              <span class="seat-base-3d"></span>
+              <!-- Volumetric Laser Beam Pillar when Selected -->
+              ${isSelected ? '<span class="seat-laser-pillar-3d"><span class="pillar-core"></span><span class="pillar-ring"></span></span>' : ''}
             </button>
           `;
         };
 
-        if (zoneAContainer) zoneAContainer.innerHTML = seatModel.filter(s => s.zone === 'A').map(createBtn).join('');
-        if (zoneBContainer) zoneBContainer.innerHTML = seatModel.filter(s => s.zone === 'B').map(createBtn).join('');
-        if (zoneCContainer) zoneCContainer.innerHTML = seatModel.filter(s => s.zone === 'C').map(createBtn).join('');
+        if (zoneAGrid) zoneAGrid.innerHTML = seatModel.filter(s => s.zone === 'A').map(create3DSeatBtn).join('');
+        if (zoneBGrid) zoneBGrid.innerHTML = seatModel.filter(s => s.zone === 'B').map(create3DSeatBtn).join('');
+        if (zoneCGrid) zoneCGrid.innerHTML = seatModel.filter(s => s.zone === 'C').map(create3DSeatBtn).join('');
 
         // Attach seat click listener
-        document.querySelectorAll('.seat-btn:not(.reserved)').forEach(btn => {
+        document.querySelectorAll('.seat-3d-item:not(.reserved)').forEach(btn => {
           btn.addEventListener('click', (e) => {
             e.stopPropagation();
             const sid = btn.getAttribute('data-seat-id');
@@ -653,8 +864,8 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
               selectedSeats.add(sid);
             }
-            playPopSound(580);
-            renderSeatButtons();
+            playPopSound(620);
+            render3DSeatButtons();
             updateBlueprintCalculations();
           });
         });
@@ -663,7 +874,6 @@ document.addEventListener('DOMContentLoaded', () => {
       function updateBlueprintCalculations() {
         const selectedVenueOpt = venueSelect.options[venueSelect.selectedIndex];
         const baseVenuePrice = parseFloat(selectedVenueOpt.getAttribute('data-price')) || 9800;
-        const totalVenueCapacity = parseInt(selectedVenueOpt.getAttribute('data-cap'), 10) || 800;
 
         const selectedSlotOpt = slotSelect.options[slotSelect.selectedIndex];
         const slotMultiplier = parseFloat(selectedSlotOpt.getAttribute('data-multiplier')) || 1.0;
@@ -694,7 +904,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const totalTariff = (baseVenuePrice * slotMultiplier) + seatingCost + addonsCost;
 
-        // Update DOM Ticker
+        // Update DOM Ticker & HUD
         const tickerCount = document.getElementById('ticker-seats-count');
         const tickerBreakdown = document.getElementById('ticker-seats-breakdown');
         const tickerCapacity = document.getElementById('ticker-capacity-val');
@@ -717,16 +927,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const percentUtilized = Math.round((selectedSeats.size / totalAvailableSeats) * 100);
         if (tickerCapacity) tickerCapacity.textContent = `${percentUtilized}% Pods`;
 
+        if (hudSeatsTelemetry) {
+          hudSeatsTelemetry.textContent = `SEATS: ${selectedSeats.size} ACTIVE (${percentUtilized}%)`;
+        }
+
         if (tickerTotal) {
           tickerTotal.textContent = '$' + totalTariff.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
       }
 
-      // Preset Button Handlers
+      // Presets
       document.getElementById('btn-preset-vip')?.addEventListener('click', () => {
         playPopSound(600);
         seatModel.filter(s => s.zone === 'A' && s.status !== 'reserved').forEach(s => selectedSeats.add(s.id));
-        renderSeatButtons();
+        render3DSeatButtons();
         updateBlueprintCalculations();
         showToast('Selected all VIP Front Row Pods 🌟');
       });
@@ -734,7 +948,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('btn-preset-delegate')?.addEventListener('click', () => {
         playPopSound(600);
         seatModel.filter(s => s.zone === 'B' && s.status !== 'reserved').slice(0, 6).forEach(s => selectedSeats.add(s.id));
-        renderSeatButtons();
+        render3DSeatButtons();
         updateBlueprintCalculations();
         showToast('Selected Delegate Conference Block 💼');
       });
@@ -742,15 +956,15 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('btn-preset-all')?.addEventListener('click', () => {
         playPopSound(650);
         seatModel.filter(s => s.status !== 'reserved').forEach(s => selectedSeats.add(s.id));
-        renderSeatButtons();
+        render3DSeatButtons();
         updateBlueprintCalculations();
-        showToast('Selected All Available Blueprint Seats 🏛️');
+        showToast('Selected All Available 3D Arena Seats 🏛️');
       });
 
       document.getElementById('btn-preset-clear')?.addEventListener('click', () => {
         playPopSound(350);
         selectedSeats.clear();
-        renderSeatButtons();
+        render3DSeatButtons();
         updateBlueprintCalculations();
         showToast('Cleared Seat Selection');
       });
@@ -811,7 +1025,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   <span class="v-value">${todayDate}</span>
                 </div>
                 <div class="v-cell">
-                  <span class="v-label">ALLOCATED SEATS (${selectedSeats.size})</span>
+                  <span class="v-label">ALLOCATED 3D SEATS (${selectedSeats.size})</span>
                   <div class="v-seats-list">${seatTagsHtml}</div>
                 </div>
                 <div class="v-cell">
@@ -876,11 +1090,12 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         });
 
-        showToast('🏛️ Venue Blueprint Pass generated successfully!');
+        showToast('🏛️ 3D Venue Pass generated successfully!');
       });
 
-      // Initial execution
-      renderSeatButtons();
+      // Initialize
+      applyArenaTransform();
+      render3DSeatButtons();
       updateBlueprintCalculations();
     }
   }

@@ -819,6 +819,91 @@ button {
   border-color: var(--card-travel-border);
 }
 
+/* Featured 3D Showcase Card Enhancement */
+.project-card.card-3d-featured {
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(7, 13, 30, 0.98));
+  border: 1.5px solid rgba(56, 189, 248, 0.45);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 25px rgba(56, 189, 248, 0.15);
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.project-card.card-3d-featured:hover {
+  border-color: #38BDF8;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65), 0 0 40px rgba(56, 189, 248, 0.35);
+  transform: translateY(-10px) rotateX(3deg) rotateY(-3deg);
+}
+
+.project-academic-badge.highlight-3d {
+  background: linear-gradient(135deg, #0284C7, #0369A1);
+  color: #FFFFFF;
+  border-color: rgba(56, 189, 248, 0.7);
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.5);
+}
+
+.mockup-3d-viewport {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+/* Holographic Scanner Beam Animation */
+.hologram-scanner-beam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, rgba(56, 189, 248, 0.8) 50%, transparent 100%);
+  box-shadow: 0 0 12px #38BDF8, 0 0 25px rgba(56, 189, 248, 0.6);
+  z-index: 3;
+  pointer-events: none;
+  animation: scanHologram 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes scanHologram {
+  0% { top: 0%; opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { top: 96%; opacity: 0.3; }
+}
+
+/* 3D Floating Pill Tag inside Card */
+.card-3d-floating-pill {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  z-index: 4;
+  background: rgba(11, 19, 43, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  border-radius: var(--radius-full);
+  padding: 0.25rem 0.65rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #38BDF8;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+.overlay-pill-btn.overlay-3d-btn {
+  background: linear-gradient(135deg, #0284C7, #0369A1);
+  color: #FFFFFF;
+  border: 1px solid rgba(56, 189, 248, 0.6);
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.6), 0 0 15px rgba(56, 189, 248, 0.4);
+}
+
+.overlay-pill-btn.overlay-3d-btn:hover {
+  background: linear-gradient(135deg, #0EA5E9, #0284C7);
+  box-shadow: 0 8px 25px rgba(14, 165, 233, 0.8);
+}
+
 .project-academic-badge {
   position: absolute;
   top: 1rem;
@@ -1898,22 +1983,94 @@ button {
 }
 
 /* ==========================================================================
-   11. Unique Blueprint & CAD 2D Seating Layout Model for Hall Booking Modal
+   11. Interactive 3D Isometric Arena & Volumetric CAD Model for Hall Booking
    ========================================================================== */
-.project-modal[data-project="hall"] {
-  background-color: #0B132B;
-  background-image: 
-    radial-gradient(circle at 85% 12%, rgba(56, 189, 248, 0.16), transparent 45%),
-    linear-gradient(rgba(56, 189, 248, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(56, 189, 248, 0.07) 1px, transparent 1px);
-  background-size: 100% 100%, 28px 28px, 28px 28px;
+
+/* Featured 3D Card on Home Page */
+.card-3d-featured {
+  border: 1px solid rgba(56, 189, 248, 0.4) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 25px rgba(56, 189, 248, 0.15) !important;
+  position: relative;
+}
+
+.card-3d-featured:hover {
+  border-color: #38BDF8 !important;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), 0 0 35px rgba(56, 189, 248, 0.3) !important;
+}
+
+.mockup-3d-viewport {
+  position: relative;
+  overflow: hidden;
+}
+
+.hologram-scanner-beam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, #38BDF8 50%, transparent 100%);
+  box-shadow: 0 0 14px #38BDF8, 0 0 28px rgba(56, 189, 248, 0.6);
+  z-index: 4;
+  animation: scanHoloBeam 3.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes scanHoloBeam {
+  0% { transform: translateY(-100%); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(360px); opacity: 0; }
+}
+
+.card-3d-floating-pill {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 5;
+  background: rgba(11, 19, 43, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(56, 189, 248, 0.45);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.75), 0 0 50px rgba(56, 189, 248, 0.25);
+  border-radius: var(--radius-full);
+  padding: 0.25rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #38BDF8;
+}
+
+.highlight-3d {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(245, 158, 11, 0.2)) !important;
+  color: #38BDF8 !important;
+  border-color: rgba(56, 189, 248, 0.4) !important;
+}
+
+.overlay-3d-btn {
+  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%) !important;
+  box-shadow: 0 4px 18px rgba(2, 132, 199, 0.5) !important;
+}
+
+/* Modal Theming for Hall Booking (Deep Space Navy Blueprint) */
+.project-modal[data-project="hall"] {
+  background-color: #070D1E;
+  background-image: 
+    radial-gradient(circle at 85% 10%, rgba(56, 189, 248, 0.2), transparent 45%),
+    radial-gradient(circle at 15% 90%, rgba(245, 158, 11, 0.12), transparent 45%),
+    linear-gradient(rgba(56, 189, 248, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.06) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+  border: 1.5px solid rgba(56, 189, 248, 0.5);
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.8), 0 0 60px rgba(56, 189, 248, 0.3);
 }
 
 .project-modal[data-project="hall"] .modal-header {
-  background-color: rgba(11, 19, 43, 0.94);
-  border-bottom: 1px solid rgba(56, 189, 248, 0.25);
+  background-color: rgba(7, 13, 30, 0.96);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.28);
 }
 
 .project-modal[data-project="hall"] .modal-tabs {
@@ -1921,15 +2078,16 @@ button {
 }
 
 .project-modal[data-project="hall"] .modal-tab-btn.active {
-  background-color: rgba(56, 189, 248, 0.16);
+  background-color: rgba(56, 189, 248, 0.18);
   color: #38BDF8;
-  border: 1px solid rgba(56, 189, 248, 0.35);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
 }
 
 .hall-blueprint-container {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.35rem;
 }
 
 .blueprint-meta-bar {
@@ -1938,7 +2096,6 @@ button {
   align-items: center;
   flex-wrap: wrap;
   gap: 0.75rem;
-  padding-bottom: 0.5rem;
 }
 
 .blueprint-tag-cluster {
@@ -1959,10 +2116,11 @@ button {
 }
 
 .blueprint-pill.highlight {
-  background: rgba(56, 189, 248, 0.15);
-  border-color: rgba(56, 189, 248, 0.4);
+  background: rgba(56, 189, 248, 0.18);
+  border-color: rgba(56, 189, 248, 0.5);
   color: #38BDF8;
-  font-weight: 700;
+  font-weight: 800;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
 }
 
 .blueprint-live-indicator {
@@ -1991,6 +2149,71 @@ button {
   100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
 }
 
+/* 3D Camera Controls Toolbar */
+.arena-3d-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  background: rgba(11, 19, 43, 0.75);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: var(--radius-md);
+  padding: 0.6rem 0.9rem;
+}
+
+.camera-mode-group {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.cam-btn {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  background: rgba(15, 23, 42, 0.8);
+  color: #94A3B8;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.cam-btn:hover {
+  background: rgba(56, 189, 248, 0.2);
+  color: #38BDF8;
+  border-color: #38BDF8;
+}
+
+.cam-btn.active {
+  background: #0284C7;
+  color: #FFFFFF;
+  border-color: #38BDF8;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.45);
+}
+
+.cam-btn.auto-rotate.active {
+  background: linear-gradient(135deg, #F59E0B, #FF6548);
+  border-color: #FDE68A;
+  box-shadow: 0 0 14px rgba(245, 158, 11, 0.5);
+}
+
+.camera-drag-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.74rem;
+  color: #64748B;
+  font-family: var(--font-mono);
+}
+
+.camera-drag-hint svg {
+  color: #38BDF8;
+}
+
+/* Venue & Slot Controls */
 .blueprint-controls-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -2011,7 +2234,7 @@ button {
 }
 
 .blueprint-select {
-  background: #152238;
+  background: #0F172A;
   color: #F8FAFC;
   border: 1px solid rgba(56, 189, 248, 0.35);
   border-radius: var(--radius-sm);
@@ -2027,65 +2250,515 @@ button {
   box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
 }
 
-.blueprint-canvas {
-  background: #0A1124;
-  border: 1px solid rgba(56, 189, 248, 0.3);
+/* ==========================================================================
+   THE 3D ISOMETRIC ARENA VIEWPORT
+   ========================================================================== */
+.arena-viewport-3d {
+  position: relative;
+  width: 100%;
+  min-height: 520px;
+  background: #060B18;
+  border: 1.5px solid rgba(56, 189, 248, 0.4);
   border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  position: relative;
   overflow: hidden;
-  box-shadow: inset 0 2px 20px rgba(0, 0, 0, 0.4);
-  background-image: 
-    linear-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
-  background-size: 20px 20px;
-}
-
-.blueprint-stage-area {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 1.8rem;
-}
-
-.stage-platform {
-  width: 78%;
-  background: linear-gradient(180deg, #1E293B 0%, #0F172A 100%);
-  border: 1px solid rgba(56, 189, 248, 0.5);
-  border-radius: 40px 40px 6px 6px;
-  padding: 0.65rem 1.25rem;
-  text-align: center;
+  perspective: 1200px;
+  perspective-origin: center center;
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.8), 0 15px 40px rgba(0, 0, 0, 0.6);
+  cursor: grab;
+  user-select: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 25px rgba(56, 189, 248, 0.2);
-  z-index: 2;
 }
 
-.stage-icon {
-  font-size: 1.1rem;
+.arena-viewport-3d:active {
+  cursor: grabbing;
 }
 
-.stage-text {
+/* The 3D World (Rotates via Orbit Engine) */
+.arena-world-3d {
+  width: 86%;
+  max-width: 680px;
+  min-height: 440px;
+  transform-style: preserve-3d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transform-origin: center center;
+  padding: 2.5rem 1rem 3.5rem;
+}
+
+/* Holographic 3D Grid Floor */
+.arena-floor-plane {
+  position: absolute;
+  inset: -15%;
+  background: radial-gradient(circle at 50% 40%, rgba(56, 189, 248, 0.12) 0%, rgba(7, 13, 30, 0.95) 75%);
+  border: 1px dashed rgba(56, 189, 248, 0.3);
+  border-radius: 24px;
+  background-image: 
+    linear-gradient(rgba(56, 189, 248, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.1) 1px, transparent 1px);
+  background-size: 28px 28px;
+  transform: translateZ(0px);
+  pointer-events: none;
+  box-shadow: 0 0 50px rgba(56, 189, 248, 0.15);
+}
+
+/* Volumetric Sweeping Spotlights */
+.spotlight-beam-3d {
+  position: absolute;
+  top: 5%;
+  width: 140px;
+  height: 380px;
+  pointer-events: none;
+  transform-origin: top center;
+  z-index: 10;
+  opacity: 0.65;
+}
+
+.spotlight-beam-3d.beam-left {
+  left: 20%;
+  background: linear-gradient(170deg, rgba(56, 189, 248, 0.45) 0%, rgba(56, 189, 248, 0.08) 50%, transparent 85%);
+  clip-path: polygon(45% 0%, 55% 0%, 100% 100%, 0% 100%);
+  animation: sweepBeamLeft 6s ease-in-out infinite alternate;
+}
+
+.spotlight-beam-3d.beam-right {
+  right: 20%;
+  background: linear-gradient(190deg, rgba(245, 158, 11, 0.45) 0%, rgba(245, 158, 11, 0.08) 50%, transparent 85%);
+  clip-path: polygon(45% 0%, 55% 0%, 100% 100%, 0% 100%);
+  animation: sweepBeamRight 7s ease-in-out infinite alternate;
+}
+
+@keyframes sweepBeamLeft {
+  0% { transform: rotateZ(-24deg) skewX(-12deg); opacity: 0.4; }
+  50% { opacity: 0.75; }
+  100% { transform: rotateZ(18deg) skewX(10deg); opacity: 0.5; }
+}
+
+@keyframes sweepBeamRight {
+  0% { transform: rotateZ(20deg) skewX(12deg); opacity: 0.5; }
+  50% { opacity: 0.8; }
+  100% { transform: rotateZ(-22deg) skewX(-8deg); opacity: 0.4; }
+}
+
+/* Elevated 3D Proscenium Stage (translateZ: 36px) */
+.stage-structure-3d {
+  width: 88%;
+  transform: translateZ(36px);
+  transform-style: preserve-3d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2.2rem;
+  position: relative;
+  z-index: 5;
+}
+
+.stage-backdrop-screen {
+  width: 95%;
+  height: 38px;
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.3) 0%, rgba(15, 23, 42, 0.95) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.6);
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.35);
+  transform: translateZ(18px);
+}
+
+.screen-text {
   font-family: var(--font-mono);
-  font-size: 0.82rem;
+  font-size: 0.74rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   color: #38BDF8;
-  text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
 }
 
-.stage-spotlight-beam {
+.stage-wood-deck {
+  width: 100%;
+  background: linear-gradient(180deg, #1E293B 0%, #0F172A 100%);
+  border: 1.5px solid rgba(56, 189, 248, 0.7);
+  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7), 0 0 30px rgba(56, 189, 248, 0.25);
+  position: relative;
+}
+
+.stage-podium-3d {
+  background: #111C33;
+  border: 1px solid #38BDF8;
+  border-radius: 4px;
+  padding: 0.25rem 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 10px rgba(56, 189, 248, 0.3);
+  transform: translateZ(12px);
+}
+
+.podium-mic-icon {
+  font-size: 1rem;
+}
+
+.podium-title {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #F8FAFC;
+  letter-spacing: 0.06em;
+}
+
+.stage-face-front {
+  width: 100%;
+  height: 14px;
+  background: #090E1D;
+  border-bottom: 2px solid #38BDF8;
+  box-shadow: 0 14px 25px rgba(0, 0, 0, 0.8);
+}
+
+.stage-rim-glow {
+  position: absolute;
+  bottom: -4px;
+  left: 5%;
+  right: 5%;
+  height: 8px;
+  background: #38BDF8;
+  filter: blur(8px);
+  opacity: 0.6;
+}
+
+/* ==========================================================================
+   PHYSICAL 3D SEATING RISERS & VOLUMETRIC SEATS
+   ========================================================================== */
+.riser-tier-3d {
+  width: 100%;
+  transform-style: preserve-3d;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+/* Elevation Tiers */
+.tier-a-wrap {
+  transform: translateZ(10px);
+}
+
+.tier-b-wrap {
+  transform: translateZ(28px);
+}
+
+.tier-c-wrap {
+  transform: translateZ(52px);
+}
+
+.riser-header-3d {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.6rem;
+  transform: translateZ(6px);
+}
+
+.tier-badge-3d {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-full);
+}
+
+.tier-badge-3d.vip {
+  background: rgba(245, 158, 11, 0.2);
+  color: #FBBF24;
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.25);
+}
+
+.tier-badge-3d.delegate {
+  background: rgba(56, 189, 248, 0.2);
+  color: #38BDF8;
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+}
+
+.tier-badge-3d.assembly {
+  background: rgba(148, 163, 184, 0.2);
+  color: #CBD5E1;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+}
+
+.riser-step-face {
+  position: absolute;
+  top: -10px;
+  left: 2%;
+  right: 2%;
+  height: 8px;
+  background: linear-gradient(180deg, #162036 0%, #0A1020 100%);
+  border-top: 1px solid rgba(56, 189, 248, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+}
+
+/* 3D Seat Matrix Grids */
+.seats-matrix-3d {
+  display: grid;
+  gap: 0.65rem;
+  justify-content: center;
+  transform-style: preserve-3d;
+}
+
+.zone-a-3d {
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+}
+
+.zone-b-3d {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.zone-c-3d {
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+}
+
+/* Individual Volumetric 3D Seat */
+.seat-3d-item {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  min-height: 42px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transform-style: preserve-3d;
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 3D Cushion Surface */
+.seat-cushion-3d {
+  position: absolute;
+  inset: 2px;
+  background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+  border: 1.5px solid rgba(56, 189, 248, 0.45);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 5px 0 #090E1D,
+    0 8px 14px rgba(0, 0, 0, 0.6),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  transform: translateZ(6px);
+  transition: all var(--transition-fast);
+}
+
+/* 3D Backrest */
+.seat-backrest-3d {
+  position: absolute;
+  top: -4px;
+  left: 6px;
+  right: 6px;
+  height: 6px;
+  background: #152238;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  border-radius: 3px 3px 0 0;
+  transform: rotateX(-35deg) translateZ(8px);
+}
+
+.seat-label-3d {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #E2E8F0;
+  line-height: 1;
+}
+
+.seat-status-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #38BDF8;
+  margin-top: 2px;
+}
+
+/* VIP Seat Theming */
+.seat-3d-item.vip .seat-cushion-3d {
+  border-color: rgba(245, 158, 11, 0.6);
+  background: linear-gradient(135deg, #2D2312 0%, #171107 100%);
+  box-shadow: 
+    0 5px 0 #0C0904,
+    0 8px 16px rgba(0, 0, 0, 0.6),
+    0 0 10px rgba(245, 158, 11, 0.25);
+}
+
+.seat-3d-item.vip .seat-label-3d {
+  color: #FDE68A;
+}
+
+.seat-3d-item.vip .seat-status-dot {
+  background-color: #F59E0B;
+}
+
+/* Seat Hover Elevation */
+.seat-3d-item:hover:not(:disabled) {
+  transform: translateZ(14px) scale(1.12);
+  z-index: 10;
+}
+
+.seat-3d-item:hover:not(:disabled) .seat-cushion-3d {
+  border-color: #38BDF8;
+  box-shadow: 
+    0 8px 0 #090E1D,
+    0 14px 22px rgba(56, 189, 248, 0.4),
+    0 0 20px rgba(56, 189, 248, 0.5);
+}
+
+/* ==========================================================================
+   SELECTED VOLUMETRIC 3D SEAT & VERTICAL LASER LIGHT PILLAR
+   ========================================================================== */
+.seat-3d-item.selected {
+  transform: translateZ(20px) scale(1.18);
+  z-index: 12;
+}
+
+.seat-3d-item.selected .seat-cushion-3d {
+  background: linear-gradient(135deg, #F59E0B, #FF6548);
+  border-color: #FFFFFF;
+  box-shadow: 
+    0 6px 0 #9A3412,
+    0 12px 25px rgba(245, 158, 11, 0.65),
+    0 0 25px rgba(255, 101, 72, 0.9);
+}
+
+.seat-3d-item.selected .seat-label-3d {
+  color: #FFFFFF;
+  font-weight: 900;
+}
+
+.seat-3d-item.selected .seat-status-dot {
+  background-color: #FFFFFF;
+  box-shadow: 0 0 8px #FFFFFF;
+}
+
+/* The Vertical 3D Laser Light Column */
+.seat-laser-pillar-3d {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  width: 22px;
+  height: 130px;
+  transform: translateX(-50%) translateZ(16px);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.pillar-core {
+  width: 5px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent 0%, rgba(245, 158, 11, 0.3) 20%, #F59E0B 80%, #FFFFFF 100%);
+  filter: blur(1px);
+  box-shadow: 0 0 18px #F59E0B, 0 0 35px #FF6548;
+}
+
+.pillar-ring {
+  position: absolute;
+  top: 10px;
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid #FDE68A;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #F59E0B;
+  animation: laserRingRise 1.8s ease-out infinite;
+}
+
+@keyframes laserRingRise {
+  0% { transform: translateY(80px) scale(0.6); opacity: 1; }
+  100% { transform: translateY(-20px) scale(1.4); opacity: 0; }
+}
+
+/* Reserved Seat State */
+.seat-3d-item.reserved {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+.seat-3d-item.reserved .seat-cushion-3d {
+  background: #1E293B;
+  border-color: #475569;
+  box-shadow: 0 2px 0 #0F172A;
+}
+
+.seat-3d-item.reserved::after {
+  content: "✕";
+  font-size: 0.7rem;
   position: absolute;
   top: 50%;
-  left: 15%;
-  right: 15%;
-  height: 120px;
-  background: radial-gradient(ellipse at 50% 0%, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
+  left: 50%;
+  transform: translate(-50%, -50%) translateZ(8px);
+  color: #EF4444;
+  font-weight: 800;
+}
+
+/* Floating 3D Telemetry HUD (translateZ: 85px) */
+.floating-hud-3d {
+  position: absolute;
+  top: -15px;
+  right: -5px;
+  transform: translateZ(85px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
   pointer-events: none;
-  z-index: 1;
+  z-index: 20;
+}
+
+.hud-chip {
+  background: rgba(11, 19, 43, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  border-radius: var(--radius-sm);
+  padding: 0.3rem 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #38BDF8;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+}
+
+.hud-chip.highlight {
+  background: rgba(245, 158, 11, 0.2);
+  border-color: rgba(245, 158, 11, 0.5);
+  color: #FBBF24;
+}
+
+.hud-glow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #38BDF8;
+  box-shadow: 0 0 6px #38BDF8;
+}
+
+/* Legend & Toolbar Below 3D Viewport */
+.blueprint-legend-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
 }
 
 .blueprint-legend {
@@ -2094,8 +2767,7 @@ button {
   justify-content: center;
   flex-wrap: wrap;
   gap: 0.85rem;
-  padding: 0.6rem;
-  margin-bottom: 1.25rem;
+  padding: 0.65rem;
   background: rgba(15, 23, 42, 0.7);
   border: 1px solid rgba(148, 163, 184, 0.15);
   border-radius: var(--radius-sm);
@@ -2123,7 +2795,7 @@ button {
 .legend-swatch.selected {
   border: 1.5px solid #F59E0B;
   background: #F59E0B;
-  box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.6);
 }
 
 .legend-swatch.reserved {
@@ -2157,132 +2829,12 @@ button {
   border: 1px solid rgba(148, 163, 184, 0.3);
 }
 
-.seating-zone-block {
-  margin-bottom: 1.25rem;
-}
-
-.zone-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 0.6rem;
-  padding: 0 0.25rem;
-}
-
-.zone-title {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  color: #F8FAFC;
-}
-
-.zone-desc {
-  font-size: 0.72rem;
-  color: #64748B;
-}
-
-.seats-row {
-  display: grid;
-  gap: 0.55rem;
-  justify-content: center;
-}
-
-.zone-a-seats {
-  grid-template-columns: repeat(8, minmax(0, 1fr));
-}
-
-.zone-b-seats {
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-}
-
-.zone-c-seats {
-  grid-template-columns: repeat(16, minmax(0, 1fr));
-}
-
-.seat-btn {
-  aspect-ratio: 1 / 1;
-  border-radius: 6px;
-  border: 1.5px solid rgba(56, 189, 248, 0.3);
-  background: rgba(15, 23, 42, 0.8);
-  color: #94A3B8;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  font-weight: 700;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  padding: 2px;
-  position: relative;
-}
-
-.seat-btn:hover:not(:disabled) {
-  transform: translateY(-2px) scale(1.08);
-  border-color: #38BDF8;
-  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.35);
-  z-index: 2;
-}
-
-.seat-btn.vip {
-  border-color: rgba(245, 158, 11, 0.45);
-  color: #FDE68A;
-}
-
-.seat-btn.vip:hover:not(:disabled) {
-  border-color: #F59E0B;
-  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.45);
-}
-
-.seat-btn.selected {
-  background: linear-gradient(135deg, #F59E0B, #FF6548);
-  border-color: #FFFFFF;
-  color: #FFFFFF;
-  font-weight: 800;
-  box-shadow: 0 0 16px rgba(245, 158, 11, 0.6);
-  transform: scale(1.06);
-  z-index: 3;
-  animation: seatSelectedPulse 1.8s infinite alternate;
-}
-
-@keyframes seatSelectedPulse {
-  0% { box-shadow: 0 0 10px rgba(245, 158, 11, 0.5); }
-  100% { box-shadow: 0 0 20px rgba(255, 101, 72, 0.85); }
-}
-
-.seat-btn.reserved {
-  background: rgba(30, 41, 59, 0.5);
-  border-color: rgba(71, 85, 105, 0.4);
-  color: #475569;
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
-.seat-btn.reserved::after {
-  content: "✕";
-  font-size: 0.6rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #64748B;
-}
-
-.seat-id-txt {
-  font-size: 0.64rem;
-  line-height: 1;
-}
-
 .blueprint-presets-toolbar {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-top: 1.25rem;
-  padding-top: 1rem;
-  border-top: 1px dashed rgba(56, 189, 248, 0.2);
+  justify-content: center;
 }
 
 .presets-label {
@@ -2297,7 +2849,7 @@ button {
   padding: 0.35rem 0.75rem;
   border-radius: var(--radius-full);
   border: 1px solid rgba(56, 189, 248, 0.3);
-  background: rgba(15, 23, 42, 0.8);
+  background: rgba(15, 23, 42, 0.85);
   color: #38BDF8;
   cursor: pointer;
   transition: all var(--transition-fast);
@@ -2321,9 +2873,10 @@ button {
   color: #FFFFFF;
 }
 
+/* Add-ons & Ticker Bar */
 .blueprint-addons-box {
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(56, 189, 248, 0.2);
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(56, 189, 248, 0.25);
   border-radius: var(--radius-md);
   padding: 1rem 1.25rem;
 }
@@ -2357,14 +2910,15 @@ button {
 }
 
 .blueprint-ticker-bar {
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(11, 19, 43, 0.95));
-  border: 1px solid rgba(56, 189, 248, 0.35);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(11, 19, 43, 0.98));
+  border: 1.5px solid rgba(56, 189, 248, 0.4);
   border-radius: var(--radius-md);
   padding: 1rem 1.25rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   align-items: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .ticker-stat {
@@ -2421,7 +2975,7 @@ button {
   font-size: 1rem;
   padding: 0.95rem 1.8rem;
   border-radius: var(--radius-full);
-  box-shadow: 0 4px 18px rgba(2, 132, 199, 0.45);
+  box-shadow: 0 4px 20px rgba(2, 132, 199, 0.5);
   transition: all var(--transition-normal);
   width: 100%;
   cursor: pointer;
@@ -2431,10 +2985,10 @@ button {
 .btn-generate-voucher:hover {
   background: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(56, 189, 248, 0.5);
+  box-shadow: 0 8px 28px rgba(56, 189, 248, 0.6);
 }
 
-/* Digital Booking Voucher (Printable Boarding Pass Model) */
+/* Digital Booking Voucher */
 .digital-voucher-wrapper {
   animation: fadeIn 0.4s ease;
 }
@@ -2617,7 +3171,6 @@ button {
   color: #0F172A;
 }
 
-/* Right Stub */
 .voucher-stub {
   background: linear-gradient(180deg, #162036 0%, #0E1628 100%);
   border-left: 2px dashed rgba(56, 189, 248, 0.35);
@@ -2633,7 +3186,7 @@ button {
   position: absolute;
   width: 22px;
   height: 22px;
-  background-color: var(--bg-surface);
+  background-color: #070D1E;
   border-radius: 50%;
   left: -11px;
   border: 1.5px solid rgba(56, 189, 248, 0.45);
@@ -2711,21 +3264,25 @@ button {
   padding: 0.15rem 0.4rem;
 }
 
-/* Responsive Blueprint Modal */
+/* Responsive 3D Arena */
 @media (max-width: 768px) {
   .blueprint-controls-grid {
     grid-template-columns: 1fr;
   }
 
-  .zone-a-seats {
+  .arena-viewport-3d {
+    min-height: 420px;
+  }
+
+  .zone-a-3d {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  .zone-b-seats {
+  .zone-b-3d {
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 
-  .zone-c-seats {
+  .zone-c-3d {
     grid-template-columns: repeat(8, minmax(0, 1fr));
   }
 
