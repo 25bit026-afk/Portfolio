@@ -201,23 +201,23 @@ document.addEventListener('DOMContentLoaded', () => {
       demoType: "hotel"
     },
     hall: {
-      title: "Convention Hall & Banquet Booking Portal",
-      subtitle: "Capstone Project 3 • B.Sc Information Technology",
+      title: "Convention Hall & CAD Seating Booking Suite",
+      subtitle: "Capstone Project 3 • Architectural Blueprint Edition • B.Sc Information Technology",
       image: "assets/images/project-hall.jpg",
-      tags: ["HTML5", "CSS3", "JavaScript ES6+", "Slot Scheduling", "Capacity Algorithm", "Receipt Generation"],
+      tags: ["HTML5", "CSS3 Blueprint CAD", "JavaScript ES6+", "2D Seating Model", "Slot Tariff Matrix", "Digital Pass Generator"],
       overview: `
         <h4>1. Problem Statement</h4>
-        <p>Reserving college auditoriums, banquet halls, and convention spaces often involves scheduling conflicts, lack of seating capacity transparency, and tedious manual paperwork.</p>
+        <p>Reserving college auditoriums, banquet halls, and convention spaces often involves scheduling conflicts, lack of seating capacity transparency, and tedious manual paperwork. Traditional tools lack visual seat mapping and instant booking vouchers.</p>
         
-        <h4>2. Academic Objectives</h4>
+        <h4>2. Academic Objectives & Architectural Model</h4>
         <ul>
-          <li>Construct date-clash prevention logic to prevent overlapping slot reservations (Morning, Evening, Full Day).</li>
-          <li>Implement real-time guest capacity filter algorithms matching venue floor-plan specifications.</li>
-          <li>Generate print-ready digital booking confirmation vouchers with dynamic reference identifiers.</li>
+          <li>Engineer an interactive 2D floor-plan matrix dividing venues into VIP Executive, Delegate, and General Assembly pods.</li>
+          <li>Implement real-time capacity and dynamic tariff calculations considering session multipliers and technical add-ons.</li>
+          <li>Generate authenticated digital boarding-pass style booking passes with randomized verification barcodes and print-ready layouts.</li>
         </ul>
 
         <h4>3. Learning Outcomes</h4>
-        <p>Acquired expertise in scheduling data structures, slot conflict validation algorithms, and print-ready digital receipt rendering.</p>
+        <p>Demonstrated mastery in stateful DOM grid rendering, spatial data modeling, reactive tariff aggregation, and print stylesheet optimization.</p>
       `,
       demoType: "hall"
     }
@@ -227,6 +227,8 @@ document.addEventListener('DOMContentLoaded', () => {
     playPopSound(500);
     const data = projectData[projectId];
     if (!data || !projectModal) return;
+
+    projectModal.setAttribute('data-project', projectId);
 
     modalTitle.textContent = data.title;
     modalSubtitle.textContent = data.subtitle;
@@ -249,6 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function closeProjectModal() {
     playPopSound(400);
     projectModal.close();
+    projectModal.removeAttribute('data-project');
     document.body.style.overflow = '';
   }
 
@@ -408,85 +411,477 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     else if (type === 'hall') {
       modalDemoContainer.innerHTML = `
-        <div class="demo-sandbox">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-            <h4 style="font-weight:800;">🏛️ Convention Hall Booking Simulator</h4>
-            <span style="font-size:0.8rem; color:var(--skill-css); font-weight:700;">● Active Simulation</span>
+        <div class="hall-blueprint-container">
+          <!-- Top Architectural Status Bar -->
+          <div class="blueprint-meta-bar">
+            <div class="blueprint-tag-cluster">
+              <span class="blueprint-pill highlight">📐 CAD SEATING BLUEPRINT v2.6</span>
+              <span class="blueprint-pill">FLOOR-PLAN [TIER-1 ARCHITECTURE]</span>
+            </div>
+            <div class="blueprint-live-indicator">
+              <span class="pulse-cyan-dot"></span>
+              <span>INTERACTIVE SEAT SELECTOR</span>
+            </div>
           </div>
-          <div style="margin-bottom:1rem;">
-            <label style="font-size:0.8rem; font-weight:700; display:block; margin-bottom:0.3rem;">Select Hall / Auditorium:</label>
-            <select id="hall-venue-select" class="recipe-search-input" style="width:100%; border-radius:var(--radius-sm);">
-              <option value="1200" data-price="12500" data-name="Horizon Grand Ballroom">Horizon Grand Ballroom (Capacity: 1,200 • $12,500)</option>
-              <option value="800" data-price="9800" data-name="Apex Convention Center" selected>Apex Convention Center (Capacity: 800 • $9,800)</option>
-              <option value="450" data-price="6500" data-name="Skyline Banquet Hall">Skyline Banquet Hall (Capacity: 450 • $6,500)</option>
-            </select>
-          </div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
-            <div>
-              <label style="font-size:0.8rem; font-weight:700; display:block; margin-bottom:0.3rem;">Booking Slot:</label>
-              <select id="hall-slot-select" class="recipe-search-input" style="width:100%; border-radius:var(--radius-sm);">
-                <option value="morning">Morning Session (8 AM – 1 PM)</option>
-                <option value="evening" selected>Evening Banquet (4 PM – 10 PM)</option>
-                <option value="fullday">Full Day Summit (8 AM – 10 PM)</option>
+
+          <!-- Venue & Slot Configuration Controls -->
+          <div class="blueprint-controls-grid">
+            <div class="blueprint-field">
+              <label class="blueprint-label">Convention Venue Model:</label>
+              <select id="hall-venue-select" class="blueprint-select">
+                <option value="apex" data-name="Apex Convention Center" data-price="9800" data-cap="800" selected>
+                  Apex Convention Center (Capacity: 800 • Base: $9,800)
+                </option>
+                <option value="horizon" data-name="Horizon Grand Ballroom" data-price="12500" data-cap="1200">
+                  Horizon Grand Ballroom (Capacity: 1,200 • Base: $12,500)
+                </option>
+                <option value="skyline" data-name="Skyline Banquet Hall" data-price="6500" data-cap="450">
+                  Skyline Banquet Hall (Capacity: 450 • Base: $6,500)
+                </option>
               </select>
             </div>
-            <div>
-              <label style="font-size:0.8rem; font-weight:700; display:block; margin-bottom:0.3rem;">Expected Attendees: <span id="hall-guest-val">600</span></label>
-              <input type="range" id="hall-guest-slider" min="100" max="1500" step="50" value="600" style="width:100%; margin-top:0.4rem;" />
+
+            <div class="blueprint-field">
+              <label class="blueprint-label">Time &amp; Session Window:</label>
+              <select id="hall-slot-select" class="blueprint-select">
+                <option value="morning" data-multiplier="1.0">Morning Session (8:00 AM – 1:00 PM)</option>
+                <option value="evening" data-multiplier="1.25" selected>Evening Banquet (4:00 PM – 10:00 PM)</option>
+                <option value="fullday" data-multiplier="1.75">Full Day Tech Summit (8:00 AM – 10:00 PM)</option>
+              </select>
             </div>
           </div>
-          <div id="hall-capacity-status" style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--radius-sm); padding:0.85rem; font-size:0.85rem; margin-bottom:1rem; display:flex; justify-content:space-between; align-items:center;">
-            <span>Capacity Check: <strong id="hall-status-txt" style="color:#10B981;">Valid (Within 800 Limit) ✓</strong></span>
-            <span id="hall-slot-availability" style="font-weight:700; color:var(--skill-css);">Slot Available</span>
+
+          <!-- 2D Interactive Seating Layout Canvas -->
+          <div class="blueprint-canvas" id="blueprint-canvas-area">
+            <!-- Stage / Keynote Proscenium Arch -->
+            <div class="blueprint-stage-area">
+              <div class="stage-platform">
+                <span class="stage-icon">🎙️</span>
+                <span class="stage-text">KEYNOTE STAGE &amp; PROSCENIUM ARCH</span>
+              </div>
+              <div class="stage-spotlight-beam"></div>
+            </div>
+
+            <!-- Seating Map Legend -->
+            <div class="blueprint-legend">
+              <div class="legend-item"><span class="legend-swatch available"></span> Available</div>
+              <div class="legend-item"><span class="legend-swatch selected"></span> Selected</div>
+              <div class="legend-item"><span class="legend-swatch reserved"></span> Reserved</div>
+              <div class="legend-item"><span class="legend-badge vip">VIP Tier ($45)</span></div>
+              <div class="legend-item"><span class="legend-badge delegate">Delegate ($25)</span></div>
+              <div class="legend-item"><span class="legend-badge assembly">Assembly ($15)</span></div>
+            </div>
+
+            <!-- Zone A: VIP Front Row Roundtables -->
+            <div class="seating-zone-block">
+              <div class="zone-header">
+                <span class="zone-title">ZONE A — VIP EXECUTIVE PODS ($45 / Seat)</span>
+                <span class="zone-desc">Front-row acoustic focal point with luxury armchairs</span>
+              </div>
+              <div class="seats-row zone-a-seats" id="zone-a-container"></div>
+            </div>
+
+            <!-- Zone B: Delegate Conference Seating -->
+            <div class="seating-zone-block">
+              <div class="zone-header">
+                <span class="zone-title">ZONE B — DELEGATE CONFERENCE TIERS ($25 / Seat)</span>
+                <span class="zone-desc">Tiered mid-hall seating with charging hubs &amp; desk mounts</span>
+              </div>
+              <div class="seats-row zone-b-seats" id="zone-b-container"></div>
+            </div>
+
+            <!-- Zone C: General Assembly / Gallery -->
+            <div class="seating-zone-block">
+              <div class="zone-header">
+                <span class="zone-title">ZONE C — AUDITORIUM GALLERY ($15 / Seat)</span>
+                <span class="zone-desc">Elevated stadium gallery with panoramic stage sightlines</span>
+              </div>
+              <div class="seats-row zone-c-seats" id="zone-c-container"></div>
+            </div>
+
+            <!-- Quick Preset Action Toolbar -->
+            <div class="blueprint-presets-toolbar">
+              <span class="presets-label">Quick Presets:</span>
+              <button type="button" class="preset-btn" id="btn-preset-vip">Select VIP Pods (Zone A)</button>
+              <button type="button" class="preset-btn" id="btn-preset-delegate">Select Delegate Block</button>
+              <button type="button" class="preset-btn" id="btn-preset-all">Select All Available</button>
+              <button type="button" class="preset-btn reset" id="btn-preset-clear">Clear Seats</button>
+            </div>
           </div>
-          <button type="button" class="btn-submit-eval" id="btn-reserve-hall" style="width:100%; padding:0.75rem;">
-            <span>Simulate Hall Reservation</span>
+
+          <!-- Add-on Services Checklist -->
+          <div class="blueprint-addons-box">
+            <h5 class="addons-heading">Production &amp; Hospitality Add-ons:</h5>
+            <div class="addons-grid">
+              <label class="addon-checkbox-label">
+                <input type="checkbox" id="addon-video-wall" value="450" checked />
+                <span>4K Dual Laser Video Wall (+$450)</span>
+              </label>
+              <label class="addon-checkbox-label">
+                <input type="checkbox" id="addon-sound-rig" value="250" checked />
+                <span>Acoustic Multi-Mic Sound Rig (+$250)</span>
+              </label>
+              <label class="addon-checkbox-label">
+                <input type="checkbox" id="addon-buffet" value="18" />
+                <span>Executive Buffet &amp; High-Tea ($18 / Seat)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Real-time Cost & Capacity Ticker -->
+          <div class="blueprint-ticker-bar">
+            <div class="ticker-stat">
+              <span class="ticker-label">Selected Seats</span>
+              <span class="ticker-value" id="ticker-seats-count">0 Seats</span>
+            </div>
+            <div class="ticker-stat">
+              <span class="ticker-label">Seats Breakdown</span>
+              <span class="ticker-sub" id="ticker-seats-breakdown">None selected</span>
+            </div>
+            <div class="ticker-stat">
+              <span class="ticker-label">Capacity Utilized</span>
+              <span class="ticker-value highlight" id="ticker-capacity-val">0%</span>
+            </div>
+            <div class="ticker-stat total-col">
+              <span class="ticker-label">Estimated Total Tariff</span>
+              <span class="ticker-total" id="ticker-total-tariff">$0.00</span>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="button" class="btn-generate-voucher" id="btn-generate-hall-voucher">
+            <span>Generate Official Booking Voucher &amp; CAD Pass 🎟️</span>
           </button>
-          <div id="hall-booking-result" style="display:none; margin-top:1rem; background:#EFF6FF; border:1px solid #257CE6; border-radius:var(--radius-sm); padding:0.85rem; color:#1E40AF; font-size:0.88rem;"></div>
+
+          <!-- Generated Digital Booking Pass (Printable Boarding Pass Style) -->
+          <div id="hall-voucher-container" class="digital-voucher-wrapper" style="display:none;"></div>
         </div>
       `;
 
+      // -----------------------------------------------------------------------
+      // Hall Blueprint Seating Model Store
+      // -----------------------------------------------------------------------
+      const seatModel = [
+        // Zone A: VIP ($45)
+        { id: 'A1', zone: 'A', name: 'VIP Pod A1', price: 45, status: 'available' },
+        { id: 'A2', zone: 'A', name: 'VIP Pod A2', price: 45, status: 'available' },
+        { id: 'A3', zone: 'A', name: 'VIP Pod A3', price: 45, status: 'reserved' },
+        { id: 'A4', zone: 'A', name: 'VIP Pod A4', price: 45, status: 'available' },
+        { id: 'A5', zone: 'A', name: 'VIP Pod A5', price: 45, status: 'available' },
+        { id: 'A6', zone: 'A', name: 'VIP Pod A6', price: 45, status: 'available' },
+        { id: 'A7', zone: 'A', name: 'VIP Pod A7', price: 45, status: 'available' },
+        { id: 'A8', zone: 'A', name: 'VIP Pod A8', price: 45, status: 'available' },
+
+        // Zone B: Delegate ($25)
+        { id: 'B1', zone: 'B', name: 'Delegate B1', price: 25, status: 'available' },
+        { id: 'B2', zone: 'B', name: 'Delegate B2', price: 25, status: 'available' },
+        { id: 'B3', zone: 'B', name: 'Delegate B3', price: 25, status: 'available' },
+        { id: 'B4', zone: 'B', name: 'Delegate B4', price: 25, status: 'available' },
+        { id: 'B5', zone: 'B', name: 'Delegate B5', price: 25, status: 'available' },
+        { id: 'B6', zone: 'B', name: 'Delegate B6', price: 25, status: 'reserved' },
+        { id: 'B7', zone: 'B', name: 'Delegate B7', price: 25, status: 'available' },
+        { id: 'B8', zone: 'B', name: 'Delegate B8', price: 25, status: 'available' },
+        { id: 'B9', zone: 'B', name: 'Delegate B9', price: 25, status: 'available' },
+        { id: 'B10', zone: 'B', name: 'Delegate B10', price: 25, status: 'available' },
+        { id: 'B11', zone: 'B', name: 'Delegate B11', price: 25, status: 'reserved' },
+        { id: 'B12', zone: 'B', name: 'Delegate B12', price: 25, status: 'available' },
+
+        // Zone C: General Assembly ($15)
+        { id: 'C1', zone: 'C', name: 'Assembly C1', price: 15, status: 'available' },
+        { id: 'C2', zone: 'C', name: 'Assembly C2', price: 15, status: 'available' },
+        { id: 'C3', zone: 'C', name: 'Assembly C3', price: 15, status: 'available' },
+        { id: 'C4', zone: 'C', name: 'Assembly C4', price: 15, status: 'reserved' },
+        { id: 'C5', zone: 'C', name: 'Assembly C5', price: 15, status: 'available' },
+        { id: 'C6', zone: 'C', name: 'Assembly C6', price: 15, status: 'available' },
+        { id: 'C7', zone: 'C', name: 'Assembly C7', price: 15, status: 'available' },
+        { id: 'C8', zone: 'C', name: 'Assembly C8', price: 15, status: 'available' },
+        { id: 'C9', zone: 'C', name: 'Assembly C9', price: 15, status: 'reserved' },
+        { id: 'C10', zone: 'C', name: 'Assembly C10', price: 15, status: 'available' },
+        { id: 'C11', zone: 'C', name: 'Assembly C11', price: 15, status: 'available' },
+        { id: 'C12', zone: 'C', name: 'Assembly C12', price: 15, status: 'available' },
+        { id: 'C13', zone: 'C', name: 'Assembly C13', price: 15, status: 'available' },
+        { id: 'C14', zone: 'C', name: 'Assembly C14', price: 15, status: 'reserved' },
+        { id: 'C15', zone: 'C', name: 'Assembly C15', price: 15, status: 'available' },
+        { id: 'C16', zone: 'C', name: 'Assembly C16', price: 15, status: 'available' }
+      ];
+
+      // Pre-select 4 premium seats so the interactive CAD model is instantly active
+      const selectedSeats = new Set(['A1', 'A2', 'B4', 'B5']);
+
+      const zoneAContainer = document.getElementById('zone-a-container');
+      const zoneBContainer = document.getElementById('zone-b-container');
+      const zoneCContainer = document.getElementById('zone-c-container');
       const venueSelect = document.getElementById('hall-venue-select');
-      const guestSlider = document.getElementById('hall-guest-slider');
-      const guestVal = document.getElementById('hall-guest-val');
-      const statusTxt = document.getElementById('hall-status-txt');
+      const slotSelect = document.getElementById('hall-slot-select');
+      const addonVideoWall = document.getElementById('addon-video-wall');
+      const addonSoundRig = document.getElementById('addon-sound-rig');
+      const addonBuffet = document.getElementById('addon-buffet');
 
-      function checkHallCapacity() {
-        const maxCap = parseInt(venueSelect.value, 10);
-        const guests = parseInt(guestSlider.value, 10);
-        guestVal.textContent = guests;
+      function renderSeatButtons() {
+        const createBtn = (seat) => {
+          const isSelected = selectedSeats.has(seat.id);
+          const isReserved = seat.status === 'reserved';
+          const zoneClass = seat.zone === 'A' ? 'vip' : seat.zone === 'B' ? 'delegate' : 'assembly';
 
-        if (guests <= maxCap) {
-          statusTxt.textContent = `Valid (${guests} within ${maxCap} limit) ✓`;
-          statusTxt.style.color = '#10B981';
-        } else {
-          statusTxt.textContent = `Warning (${guests} exceeds max cap of ${maxCap}) ⚠`;
-          statusTxt.style.color = '#EF4444';
+          let stateClass = 'available';
+          if (isReserved) stateClass = 'reserved';
+          else if (isSelected) stateClass = 'selected';
+
+          return `
+            <button type="button" 
+              class="seat-btn ${zoneClass} ${stateClass}" 
+              data-seat-id="${seat.id}"
+              ${isReserved ? 'disabled title="Seat ' + seat.id + ' is already reserved"' : 'title="Seat ' + seat.id + ' • ' + seat.name + ' • $' + seat.price + '"'}
+              aria-label="${seat.name}, $${seat.price}, ${stateClass}">
+              <span class="seat-id-txt">${seat.id}</span>
+              <span class="seat-pip"></span>
+            </button>
+          `;
+        };
+
+        if (zoneAContainer) zoneAContainer.innerHTML = seatModel.filter(s => s.zone === 'A').map(createBtn).join('');
+        if (zoneBContainer) zoneBContainer.innerHTML = seatModel.filter(s => s.zone === 'B').map(createBtn).join('');
+        if (zoneCContainer) zoneCContainer.innerHTML = seatModel.filter(s => s.zone === 'C').map(createBtn).join('');
+
+        // Attach seat click listener
+        document.querySelectorAll('.seat-btn:not(.reserved)').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const sid = btn.getAttribute('data-seat-id');
+            if (selectedSeats.has(sid)) {
+              selectedSeats.delete(sid);
+            } else {
+              selectedSeats.add(sid);
+            }
+            playPopSound(580);
+            renderSeatButtons();
+            updateBlueprintCalculations();
+          });
+        });
+      }
+
+      function updateBlueprintCalculations() {
+        const selectedVenueOpt = venueSelect.options[venueSelect.selectedIndex];
+        const baseVenuePrice = parseFloat(selectedVenueOpt.getAttribute('data-price')) || 9800;
+        const totalVenueCapacity = parseInt(selectedVenueOpt.getAttribute('data-cap'), 10) || 800;
+
+        const selectedSlotOpt = slotSelect.options[slotSelect.selectedIndex];
+        const slotMultiplier = parseFloat(selectedSlotOpt.getAttribute('data-multiplier')) || 1.0;
+
+        let seatingCost = 0;
+        let countA = 0;
+        let countB = 0;
+        let countC = 0;
+
+        selectedSeats.forEach(sid => {
+          const s = seatModel.find(item => item.id === sid);
+          if (s) {
+            seatingCost += s.price;
+            if (s.zone === 'A') countA++;
+            else if (s.zone === 'B') countB++;
+            else if (s.zone === 'C') countC++;
+          }
+        });
+
+        // Add-ons computation
+        let addonsCost = 0;
+        if (addonVideoWall?.checked) addonsCost += parseFloat(addonVideoWall.value) || 0;
+        if (addonSoundRig?.checked) addonsCost += parseFloat(addonSoundRig.value) || 0;
+        if (addonBuffet?.checked) {
+          const buffetRate = parseFloat(addonBuffet.value) || 0;
+          addonsCost += buffetRate * Math.max(selectedSeats.size, 1);
+        }
+
+        const totalTariff = (baseVenuePrice * slotMultiplier) + seatingCost + addonsCost;
+
+        // Update DOM Ticker
+        const tickerCount = document.getElementById('ticker-seats-count');
+        const tickerBreakdown = document.getElementById('ticker-seats-breakdown');
+        const tickerCapacity = document.getElementById('ticker-capacity-val');
+        const tickerTotal = document.getElementById('ticker-total-tariff');
+
+        if (tickerCount) tickerCount.textContent = `${selectedSeats.size} Seats`;
+        if (tickerBreakdown) {
+          if (selectedSeats.size === 0) {
+            tickerBreakdown.textContent = 'None selected';
+          } else {
+            const parts = [];
+            if (countA > 0) parts.push(`${countA} VIP`);
+            if (countB > 0) parts.push(`${countB} Del`);
+            if (countC > 0) parts.push(`${countC} Asm`);
+            tickerBreakdown.textContent = parts.join(' • ');
+          }
+        }
+
+        const totalAvailableSeats = seatModel.filter(s => s.status !== 'reserved').length;
+        const percentUtilized = Math.round((selectedSeats.size / totalAvailableSeats) * 100);
+        if (tickerCapacity) tickerCapacity.textContent = `${percentUtilized}% Pods`;
+
+        if (tickerTotal) {
+          tickerTotal.textContent = '$' + totalTariff.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
       }
 
-      venueSelect?.addEventListener('change', checkHallCapacity);
-      guestSlider?.addEventListener('input', checkHallCapacity);
-
-      document.getElementById('btn-reserve-hall')?.addEventListener('click', () => {
-        playPopSound(700);
-        const opt = venueSelect.options[venueSelect.selectedIndex];
-        const venueName = opt.getAttribute('data-name');
-        const price = opt.getAttribute('data-price');
-        const slot = document.getElementById('hall-slot-select').value;
-        const resEl = document.getElementById('hall-booking-result');
-        const bookingId = 'HALL-' + Math.floor(100000 + Math.random() * 900000);
-
-        resEl.style.display = 'block';
-        resEl.innerHTML = `
-          <strong>Hall Slot Reserved!</strong><br>
-          Booking Voucher: <code>${bookingId}</code> • ${venueName}<br>
-          Slot: <strong>${slot.toUpperCase()}</strong> • Base Tariff: <strong>$${price}</strong><br>
-          Status: <span style="background:#257CE6; color:#fff; padding:0.1rem 0.4rem; border-radius:4px; font-size:0.75rem;">Reserved &amp; Locked ✓</span>
-        `;
-        triggerConfetti();
-        showToast('🏛️ Hall slot reserved successfully in simulation!');
+      // Preset Button Handlers
+      document.getElementById('btn-preset-vip')?.addEventListener('click', () => {
+        playPopSound(600);
+        seatModel.filter(s => s.zone === 'A' && s.status !== 'reserved').forEach(s => selectedSeats.add(s.id));
+        renderSeatButtons();
+        updateBlueprintCalculations();
+        showToast('Selected all VIP Front Row Pods 🌟');
       });
+
+      document.getElementById('btn-preset-delegate')?.addEventListener('click', () => {
+        playPopSound(600);
+        seatModel.filter(s => s.zone === 'B' && s.status !== 'reserved').slice(0, 6).forEach(s => selectedSeats.add(s.id));
+        renderSeatButtons();
+        updateBlueprintCalculations();
+        showToast('Selected Delegate Conference Block 💼');
+      });
+
+      document.getElementById('btn-preset-all')?.addEventListener('click', () => {
+        playPopSound(650);
+        seatModel.filter(s => s.status !== 'reserved').forEach(s => selectedSeats.add(s.id));
+        renderSeatButtons();
+        updateBlueprintCalculations();
+        showToast('Selected All Available Blueprint Seats 🏛️');
+      });
+
+      document.getElementById('btn-preset-clear')?.addEventListener('click', () => {
+        playPopSound(350);
+        selectedSeats.clear();
+        renderSeatButtons();
+        updateBlueprintCalculations();
+        showToast('Cleared Seat Selection');
+      });
+
+      // Change listeners for recalculation
+      venueSelect?.addEventListener('change', () => { playPopSound(450); updateBlueprintCalculations(); });
+      slotSelect?.addEventListener('change', () => { playPopSound(450); updateBlueprintCalculations(); });
+      addonVideoWall?.addEventListener('change', updateBlueprintCalculations);
+      addonSoundRig?.addEventListener('change', updateBlueprintCalculations);
+      addonBuffet?.addEventListener('change', updateBlueprintCalculations);
+
+      // Generate Voucher Pass Handler
+      document.getElementById('btn-generate-hall-voucher')?.addEventListener('click', () => {
+        playPopSound(750);
+        triggerConfetti();
+
+        const voucherWrap = document.getElementById('hall-voucher-container');
+        if (!voucherWrap) return;
+
+        const selectedVenueOpt = venueSelect.options[venueSelect.selectedIndex];
+        const venueName = selectedVenueOpt.getAttribute('data-name');
+        const selectedSlotOpt = slotSelect.options[slotSelect.selectedIndex];
+        const slotText = selectedSlotOpt.textContent.split('(')[0].trim();
+        const totalFormatted = document.getElementById('ticker-total-tariff')?.textContent || '$9,800.00';
+
+        const voucherId = 'KGCAS-HALL-' + Math.floor(100000 + Math.random() * 900000);
+        const todayDate = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+        const seatTagsHtml = selectedSeats.size > 0 
+          ? Array.from(selectedSeats).sort().map(sid => `<span class="voucher-seat-badge">${sid}</span>`).join(' ')
+          : '<span style="color:#94A3B8; font-style:italic;">General Admission (No reserved pods)</span>';
+
+        voucherWrap.style.display = 'block';
+        voucherWrap.innerHTML = `
+          <div class="digital-voucher-card">
+            <!-- Left Main Ticket Section -->
+            <div class="voucher-main-body">
+              <div class="voucher-holo-stripe"></div>
+              
+              <div class="voucher-header">
+                <div class="voucher-title-wrap">
+                  <span class="voucher-academic-badge">🎓 OFFICIAL ACADEMIC VENUE PASS • CAPSTONE PROJECT 3</span>
+                  <h4 class="voucher-venue-title">${venueName}</h4>
+                </div>
+                <div class="voucher-ref-badge">
+                  <span class="ref-label">PASS REF</span>
+                  <span class="ref-id" id="pass-ref-code">${voucherId}</span>
+                </div>
+              </div>
+
+              <div class="voucher-details-grid">
+                <div class="v-cell">
+                  <span class="v-label">RESERVATION SLOT</span>
+                  <span class="v-value">${slotText}</span>
+                </div>
+                <div class="v-cell">
+                  <span class="v-label">EVENT DATE</span>
+                  <span class="v-value">${todayDate}</span>
+                </div>
+                <div class="v-cell">
+                  <span class="v-label">ALLOCATED SEATS (${selectedSeats.size})</span>
+                  <div class="v-seats-list">${seatTagsHtml}</div>
+                </div>
+                <div class="v-cell">
+                  <span class="v-label">TOTAL AUTHORIZED TARIFF</span>
+                  <span class="v-value total-highlight">${totalFormatted}</span>
+                </div>
+              </div>
+
+              <div class="voucher-footer">
+                <div class="voucher-author-signature">
+                  <span>Author / Developer: <strong>Kishor Kumar K M (25BIT026)</strong></span>
+                  <span class="dept-txt">B.Sc Information Technology • KGCAS</span>
+                </div>
+                <div class="voucher-btn-group">
+                  <button type="button" class="v-action-btn print" onclick="window.print()">
+                    🖨️ Print Pass
+                  </button>
+                  <button type="button" class="v-action-btn copy" id="btn-copy-pass-ref">
+                    📋 Copy Code
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Tear-Off Stub with Barcode -->
+            <div class="voucher-stub">
+              <div class="stub-notch top"></div>
+              <div class="stub-inner">
+                <div class="stub-watermark">KGCAS</div>
+                <div class="stub-qr-code">
+                  <svg width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                    <circle cx="17.5" cy="17.5" r="2.5" fill="currentColor"></circle>
+                    <line x1="14" y1="14" x2="14" y2="14.01"></line>
+                    <line x1="21" y1="14" x2="21" y2="14.01"></line>
+                    <line x1="14" y1="21" x2="14" y2="21.01"></line>
+                    <line x1="21" y1="21" x2="21" y2="21.01"></line>
+                  </svg>
+                </div>
+                <div class="stub-barcode-lines" aria-hidden="true">
+                  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="stub-code-txt">${voucherId}</div>
+                <div class="stub-verified-badge">VERIFIED ✓</div>
+              </div>
+              <div class="stub-notch bottom"></div>
+            </div>
+          </div>
+        `;
+
+        // Smooth scroll to voucher
+        voucherWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+        document.getElementById('btn-copy-pass-ref')?.addEventListener('click', () => {
+          playPopSound(500);
+          navigator.clipboard.writeText(voucherId).then(() => {
+            showToast(`Voucher Ref ${voucherId} copied to clipboard! 📋`);
+          }).catch(() => {
+            showToast(`Voucher Ref: ${voucherId}`);
+          });
+        });
+
+        showToast('🏛️ Venue Blueprint Pass generated successfully!');
+      });
+
+      // Initial execution
+      renderSeatButtons();
+      updateBlueprintCalculations();
     }
   }
 
