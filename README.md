@@ -45,17 +45,14 @@
 
 ```
 portfolio/
-├── portfolio/                   # All project source files inside a single folder
-│   ├── index.html               # Main academic portfolio webpage
-│   ├── css/
-│   │   └── styles.css           # Custom semi-dark design system & typography
-│   ├── js/
-│   │   └── main.js              # Interactive filtering, modals, direct messaging
-│   ├── assets/
-│   │   └── images/              # Project mockups & professional studio headshot
-│   └── server.js                # Local development server
-├── index.html                   # Root entry point & automatic redirect
-├── server.js                    # Root HTTP server
+├── index.html                   # Main academic portfolio webpage
+├── css/
+│   └── styles.css               # Custom semi-dark design system & typography
+├── js/
+│   └── main.js                  # Interactive filtering, modals, direct messaging
+├── assets/
+│   └── images/                  # Project mockups & transparent highlighted headshot
+├── server.js                    # Local development HTTP server
 ├── README.md                    # Project documentation & highlights
 └── .gitignore                   # Standard git exclusions
 ```
@@ -79,7 +76,7 @@ portfolio/
    ```
    http://localhost:8080
    ```
-   *(Or navigate directly to `portfolio/index.html` in any modern web browser)*
+   *(Or double-click `index.html` to open directly in any modern web browser)*
 
 ---
 

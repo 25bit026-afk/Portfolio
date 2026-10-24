@@ -17,19 +17,8 @@ const MIME_TYPES = {
 
 const server = http.createServer((req, res) => {
   let reqPath = decodeURI(req.url.split('?')[0]);
-  if (reqPath === '/' || reqPath === '') {
-    reqPath = '/portfolio/index.html';
-  }
-
-  let filePath = path.join(__dirname, reqPath);
-
-  // If not found directly, check inside portfolio/ folder
-  if (!fs.existsSync(filePath)) {
-    const fallbackPath = path.join(__dirname, 'portfolio', reqPath);
-    if (fs.existsSync(fallbackPath)) {
-      filePath = fallbackPath;
-    }
-  }
+  if (reqPath === '/') reqPath = '/index.html';
+  const filePath = path.join(__dirname, reqPath);
 
   fs.stat(filePath, (err, stats) => {
     if (err || !stats.isFile()) {

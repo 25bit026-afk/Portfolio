@@ -1,19 +1,651 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="0; url=portfolio/index.html">
-  <title>Kishor Kumar K M - Academic Portfolio</title>
-  <script>
-    window.location.replace("portfolio/index.html");
-  </script>
+  <title>Kishor Kumar K M — Academic Project Portfolio | B.Sc Information Technology</title>
+  <meta name="description"
+    content="Academic Web Development Project Portfolio submitted by Kishor Kumar K M (Roll No: 25BIT026), 2nd Year B.Sc Information Technology. Featuring Recipe Finder, Hotel Management System, and Hall Booking Portal.">
+  <meta name="theme-color" content="#181B22">
+
+  <!-- OpenGraph / Metadata -->
+  <meta property="og:title" content="Kishor Kumar K M — Academic Project Portfolio">
+  <meta property="og:description"
+    content="2nd Year B.Sc Information Technology project portfolio. Explore interactive project demonstrations, code architectures, and viva defense notes.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500&display=swap"
+    rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
 </head>
-<body style="background:#181B22; color:#F8FAFC; font-family:system-ui, -apple-system, sans-serif; display:flex; align-items:center; justify-content:center; height:100vh; margin:0; text-align:center;">
-  <div>
-    <h2 style="margin-bottom:0.5rem; color:#F8FAFC;">Kishor Kumar K M (25BIT026)</h2>
-    <p style="color:#94A3B8; margin-bottom:1rem;">Redirecting to the portfolio...</p>
-    <a href="portfolio/index.html" style="display:inline-block; padding:0.6rem 1.2rem; background:#FF6548; color:#FFFFFF; text-decoration:none; border-radius:6px; font-weight:600;">Open Portfolio</a>
+
+<body>
+  <!-- Top Academic Notice Banner -->
+  <div class="academic-top-banner" role="banner">
+    <span class="badge">Academic Submission</span>
+    <span>Department of Information Technology • B.Sc (IT) 2nd Year Coursework • Roll No: 25BIT026</span>
   </div>
+
+  <!-- Canvas Confetti Layer -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- ======================================================================
+       1. Header / Navigation
+       ====================================================================== -->
+  <header class="site-header" id="top">
+    <div class="container nav-container">
+      <div class="brand-logo-group">
+        <a href="#top" class="brand-logo" aria-label="Kishor Kumar K M Portfolio">
+          Kishor Kumar K M
+          <span class="brand-dot" aria-hidden="true"></span>
+        </a>
+        <span class="brand-subtext">B.Sc IT • 2nd Year • 25BIT026</span>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#projects" class="nav-link">Course Projects</a></li>
+          <li><a href="#education" class="nav-link">Academics</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Header Action Controls -->
+      <div class="header-actions">
+        <!-- Direct Message CTA Button -->
+        <a href="#contact" class="btn-cta" id="header-cta-btn">Send Message</a>
+
+        <!-- Mobile Navigation Hamburger -->
+        <button type="button" class="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ====================================================================
+         2. Hero Section (Kishor Kumar K M - 2nd Year BSc IT)
+         ==================================================================== -->
+    <section class="hero-section" id="home">
+      <div class="container hero-grid">
+        <!-- Left Content Column -->
+        <div class="hero-content">
+          <!-- Academic Pill Badges -->
+          <div class="academic-tags-group">
+            <div class="status-badge highlight">
+              <span class="status-dot"></span>
+              Coursework Project Submission
+            </div>
+            <div class="status-badge">
+              2nd Year • B.Sc Information Technology
+            </div>
+          </div>
+
+          <!-- Main Headline with Signature Coral Squiggle -->
+          <h1 class="hero-title">
+            Hi, I'm
+            <span class="title-highlight-wrapper">
+              Kishor.
+              <svg class="hero-squiggle" viewBox="0 0 160 28" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M 6 18 C 35 4, 75 24, 110 8 C 128 -2, 148 16, 154 12" />
+              </svg>
+            </span>
+          </h1>
+
+          <h2 class="hero-subtitle">
+            B.Sc Information Technology Student &amp; Web Developer.
+          </h2>
+
+          <p class="hero-description">
+            Submitted in partial fulfillment of the academic requirements for the <strong>Web Technologies &amp;
+              Internet Applications Coursework</strong>. Demonstrating responsive UI layout design, asynchronous API
+            data flow, and modern client-side architectures.
+          </p>
+
+          <!-- Academic Quick Metadata Card (Cleanly configured for Kishor Kumar K M) -->
+          <div class="academic-quick-meta">
+            <div class="meta-field">
+              <span class="meta-field-label">Student Name:</span>
+              <span class="meta-field-val">Kishor Kumar K M</span>
+            </div>
+            <div class="meta-field">
+              <span class="meta-field-label">Roll Number:</span>
+              <span class="meta-field-val">25BIT026</span>
+            </div>
+            <div class="meta-field">
+              <span class="meta-field-label">Degree &amp; Year:</span>
+              <span class="meta-field-val">B.Sc IT • 2nd Year</span>
+            </div>
+            <div class="meta-field">
+              <span class="meta-field-label">Department:</span>
+              <span class="meta-field-val">Dept. of Information Technology</span>
+            </div>
+          </div>
+
+          <!-- Hero Action Buttons -->
+          <div class="hero-actions">
+            <a href="#projects" class="btn-hero-primary" id="hero-view-work-btn">
+              Explore Coursework Projects
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+
+            <button type="button" class="btn-hero-secondary" data-open-project="recipe">
+              <span>⚡ Live Interactive Demo</span>
+            </button>
+          </div>
+
+          <!-- Academic Stats Ticker -->
+          <div class="hero-metrics">
+            <div class="metric-item">
+              <span class="metric-val">2nd</span>
+              <span class="metric-label">Year B.Sc (IT)</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val">3</span>
+              <span class="metric-label">Course Projects</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val">100%</span>
+              <span class="metric-label">W3C Validated</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Visual Column (Portrait, Blob & Doodles) -->
+        <div class="hero-visual">
+          <div class="hero-avatar-wrapper">
+            <!-- Organic Blob Background -->
+            <div class="organic-blob-bg" aria-hidden="true"></div>
+
+            <!-- Hand-drawn Doodle Sparks -->
+            <svg class="doodle-spark-top" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3"
+              stroke-linecap="round" aria-hidden="true">
+              <line x1="24" y1="4" x2="24" y2="14" />
+              <line x1="38" y1="10" x2="31" y2="17" />
+              <line x1="44" y1="24" x2="34" y2="24" />
+            </svg>
+
+            <svg class="doodle-spark-left" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" aria-hidden="true">
+              <path d="M12 6 C16 14, 24 14, 28 22" />
+              <circle cx="20" cy="20" r="2" fill="currentColor" />
+            </svg>
+
+            <!-- Student Portrait Image -->
+            <img src="assets/images/hero-portrait.png" alt="Portrait of Kishor Kumar K M, B.Sc IT Student Developer"
+              class="hero-avatar-img" width="440" height="440" loading="eager">
+
+            <!-- Floating Student Badge -->
+            <div class="avatar-floating-card">
+              <div class="floating-icon-wrap" aria-hidden="true">💻</div>
+              <div class="floating-text-wrap">
+                <span class="floating-title">B.Sc Information Technology</span>
+                <span class="floating-subtitle">Web Design &amp; Development</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         3. Featured Academic Projects Showcase
+         ==================================================================== -->
+    <section class="showcase-section" id="projects">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header">
+          <span class="section-tag">Academic Coursework</span>
+          <h2 class="section-title">Submitted Course Projects</h2>
+          <p class="section-subtitle">
+            Demonstrating foundational &amp; modern IT principles: DOM operations, asynchronous REST queries,
+            client-side caching, and responsive design systems.
+          </p>
+        </div>
+
+        <!-- 3 Signature Coursework Projects -->
+        <div class="projects-grid">
+          <!-- Project 1: Recipe Finder (Peach Tint) -->
+          <article class="project-card card-recipe" data-skills="html css javascript api" data-open-project="recipe"
+            tabindex="0" role="button" aria-label="Open Recipe Finder project details">
+            <span class="project-academic-badge">Mini-Project 1</span>
+            <div class="card-mockup-wrapper">
+              <img src="assets/images/project-recipe.jpg"
+                alt="Laptop displaying Recipe Finder web application with culinary search UI" class="card-mockup-img"
+                loading="lazy" width="480" height="360">
+              <div class="card-hover-overlay">
+                <span class="overlay-pill-btn">
+                  Open Case Study &amp; Demo
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </span>
+              </div>
+            </div>
+
+            <h3 class="card-title">Recipe Finder</h3>
+            <p class="card-summary">Client-side ingredient search engine with asynchronous REST queries, nutritional
+              parsing, and interactive step timers.</p>
+
+            <div class="card-mini-tags">
+              <span class="mini-tag">HTML5</span>
+              <span class="mini-tag">CSS3</span>
+              <span class="mini-tag">Vanilla JS</span>
+              <span class="mini-tag">REST API</span>
+            </div>
+          </article>
+
+          <!-- Project 2: Hotel Management System (Mint Tint) -->
+          <article class="project-card card-hotel" data-skills="html css javascript localstorage"
+            data-open-project="hotel" tabindex="0" role="button" aria-label="Open Hotel Management project details">
+            <span class="project-academic-badge">Coursework Project 2</span>
+            <div class="card-mockup-wrapper">
+              <img src="assets/images/project-hotel.jpg"
+                alt="Laptop displaying Hotel Management System with luxury room listings and reservation dashboard"
+                class="card-mockup-img" loading="lazy" width="480" height="360">
+              <div class="card-hover-overlay">
+                <span class="overlay-pill-btn">
+                  Open Case Study &amp; Demo
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </span>
+              </div>
+            </div>
+
+            <h3 class="card-title">Hotel Management</h3>
+            <p class="card-summary">Automated hospitality portal for luxury room reservations, guest check-in/out
+              records, and dynamic invoice generation.</p>
+
+            <div class="card-mini-tags">
+              <span class="mini-tag">HTML5</span>
+              <span class="mini-tag">CSS3</span>
+              <span class="mini-tag">JavaScript</span>
+              <span class="mini-tag">LocalStorage</span>
+              <span class="mini-tag">CRUD</span>
+            </div>
+          </article>
+
+          <!-- Project 3: Hall Booking Portal (Sky Blue Tint) -->
+          <article class="project-card card-hall" data-skills="html css javascript scheduler" data-open-project="hall"
+            tabindex="0" role="button" aria-label="Open Hall Booking Portal project details">
+            <span class="project-academic-badge">Capstone Project 3</span>
+            <div class="card-mockup-wrapper">
+              <img src="assets/images/project-hall.jpg"
+                alt="Laptop displaying Convention Hall and Banquet Booking Portal with seating capacity and calendar picker"
+                class="card-mockup-img" loading="lazy" width="480" height="360">
+              <div class="card-hover-overlay">
+                <span class="overlay-pill-btn">
+                  Open Case Study &amp; Demo
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </span>
+              </div>
+            </div>
+
+            <h3 class="card-title">Hall Booking Portal</h3>
+            <p class="card-summary">Convention and banquet venue reservation suite featuring real-time seating capacity
+              validation and slot scheduling.</p>
+
+            <div class="card-mini-tags">
+              <span class="mini-tag">HTML5</span>
+              <span class="mini-tag">CSS3</span>
+              <span class="mini-tag">JavaScript</span>
+              <span class="mini-tag">Slot Scheduler</span>
+              <span class="mini-tag">Receipts</span>
+            </div>
+          </article>
+        </div>
+
+        <!-- ================================================================
+             4. The Signature Skill Pills (Bottom Row from Sample)
+             ================================================================ -->
+        <div class="skills-showcase-bar">
+          <div class="skills-pills-row" role="region" aria-label="Filter projects by skill">
+            <button type="button" class="skill-pill pill-html" data-skill="html" title="Filter projects using HTML">
+              HTML
+            </button>
+            <button type="button" class="skill-pill pill-css" data-skill="css" title="Filter projects using CSS">
+              CSS
+            </button>
+            <button type="button" class="skill-pill pill-js" data-skill="javascript"
+              title="Filter projects using JavaScript">
+              JavaScript
+            </button>
+            <button type="button" class="skill-pill pill-react" data-skill="react" title="Filter projects using React">
+              React
+            </button>
+            <button type="button" class="skill-pill pill-ts" data-skill="typescript"
+              title="Filter projects using TypeScript">
+              TypeScript
+            </button>
+            <button type="button" class="skill-pill pill-node" data-skill="next.js"
+              title="Filter projects using Next.js">
+              Next.js
+            </button>
+            <button type="button" class="skill-pill pill-ui" data-skill="tailwind"
+              title="Filter projects using Tailwind">
+              Tailwind CSS
+            </button>
+          </div>
+
+          <p class="skill-hint">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            Click any skill pill above to highlight related academic projects!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         5. Academic Background, Education & Coursework
+         ==================================================================== -->
+    <section class="education-section" id="education">
+      <div class="container education-grid">
+        <!-- Academic Timeline -->
+        <div class="edu-card">
+          <div class="edu-card-header">
+            <span style="font-size:1.5rem;">🎓</span>
+            <h3>Educational Qualifications</h3>
+          </div>
+
+          <div class="academic-timeline">
+            <!-- Degree -->
+            <div class="academic-entry">
+              <span class="academic-bullet"></span>
+              <div class="entry-header">
+                <span class="entry-title">B.Sc in Information Technology (2nd Year)</span>
+                <span class="entry-date">2024 – 2027 (Pursuing)</span>
+              </div>
+              <div class="entry-institution">Department of Information Technology • Roll No: 25BIT026</div>
+              <div class="entry-score">Status: Active 2nd Year Student • First Class Standing</div>
+              <p class="entry-desc">
+                Focusing on Web Application Technologies, Relational Database Systems, Programming in Java/C++, and
+                Interactive Interface Engineering.
+              </p>
+            </div>
+
+            <!-- Higher Secondary -->
+            <div class="academic-entry">
+              <span class="academic-bullet"></span>
+              <div class="entry-header">
+                <span class="entry-title">Higher Secondary Certificate (HSC / 12th Grade)</span>
+                <span class="entry-date">2022 – 2024</span>
+              </div>
+              <div class="entry-institution">Higher Secondary School • State Board</div>
+              <div class="entry-score">Percentage: 92.4% • Stream: Computer Science &amp; Mathematics</div>
+              <p class="entry-desc">
+                High academic standing with distinction in Computer Science and Mathematics.
+              </p>
+            </div>
+
+            <!-- Secondary -->
+            <div class="academic-entry">
+              <span class="academic-bullet"></span>
+              <div class="entry-header">
+                <span class="entry-title">Secondary School Certificate (SSLC / 10th Grade)</span>
+                <span class="entry-date">2021 – 2022</span>
+              </div>
+              <div class="entry-institution">Secondary High School • State Board</div>
+              <div class="entry-score">Percentage: 94.8% (Distinction)</div>
+              <p class="entry-desc">
+                Foundational schooling with strong academic achievements across science and analytical disciplines.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Relevant Coursework & Lab Competencies -->
+        <div class="coursework-box">
+          <div class="edu-card-header" style="border-bottom:none; padding-bottom:0;">
+            <span style="font-size:1.5rem;">📚</span>
+            <h3>B.Sc (IT) Core Subjects &amp; Labs</h3>
+          </div>
+          <p style="font-size:0.88rem; color:var(--text-secondary); margin-top:-0.5rem;">
+            Curriculum subjects and practical laboratory modules completed in 1st &amp; 2nd Year:
+          </p>
+
+          <div class="coursework-grid">
+            <div class="course-item">
+              <span class="course-code">IT201</span>
+              <span class="course-name">Web Design &amp; Development Lab</span>
+            </div>
+            <div class="course-item">
+              <span class="course-code">IT202</span>
+              <span class="course-name">Data Structures in C++</span>
+            </div>
+            <div class="course-item">
+              <span class="course-code">IT203</span>
+              <span class="course-name">Relational Database Systems (RDBMS)</span>
+            </div>
+            <div class="course-item">
+              <span class="course-code">IT204</span>
+              <span class="course-name">Object-Oriented Programming (Java)</span>
+            </div>
+            <div class="course-item">
+              <span class="course-code">IT205</span>
+              <span class="course-name">Computer Networks &amp; Security</span>
+            </div>
+            <div class="course-item">
+              <span class="course-code">IT206</span>
+              <span class="course-name">Operating Systems &amp; Linux Shell</span>
+            </div>
+          </div>
+
+          <div
+            style="background:var(--coral-soft); border-radius:var(--radius-sm); padding:1rem; border:1px solid rgba(255,94,77,0.2); margin-top:0.5rem;">
+            <div style="font-size:0.82rem; font-weight:800; color:var(--coral-primary); margin-bottom:0.25rem;">🏆
+              Academic &amp; Technical Highlights:</div>
+            <ul style="font-size:0.82rem; color:var(--text-primary); padding-left:1.2rem; line-height:1.5;">
+              <li>Active participation in Inter-Collegiate IT Coding &amp; Web Symposiums.</li>
+              <li>Hands-on practical mastery in Vanilla JavaScript, CSS Flexbox &amp; Grid.</li>
+              <li>Submitted all laboratory assignments and project documentation on schedule.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- ====================================================================
+         7. Direct Contact & Messaging (Send Message to Kishor Kumar K M)
+         ==================================================================== -->
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <div class="contact-card-wrapper">
+          <!-- Left Info Column -->
+          <div class="contact-info">
+            <span class="section-tag">Direct Contact</span>
+            <h2>Send a Direct Message</h2>
+            <p>
+              Have questions regarding my coursework projects, technical architecture, or academic collaborations? Send
+              me a direct message and I will get back to you promptly.
+            </p>
+
+            <!-- Direct Contact Channels -->
+            <div class="contact-channels-group">
+              <a href="mailto:25bit026@kgcas.com" class="contact-channel-card" title="Send direct email to Kishor">
+                <div class="channel-icon" aria-hidden="true">✉️</div>
+                <div class="channel-content">
+                  <span class="channel-label">Direct Email</span>
+                  <span class="channel-value">25bit026@kgcas.com</span>
+                </div>
+              </a>
+
+              <div class="contact-channel-card">
+                <div class="channel-icon" aria-hidden="true">🎓</div>
+                <div class="channel-content">
+                  <span class="channel-label">Academic Profile</span>
+                  <span class="channel-value">2nd Year B.Sc IT • Dept. of IT</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Student Verification Info & Copy -->
+            <button type="button" class="btn-copy-email" id="copy-email-btn" title="Copy Student Roll & Details">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              Copy Student Academic Credentials
+            </button>
+          </div>
+
+          <!-- Right Interactive Direct Message Form -->
+          <div class="contact-form-wrap">
+            <form class="contact-form" id="direct-message-form">
+              <div class="form-group">
+                <label for="sender-name" class="form-label">Your Name</label>
+                <input type="text" id="sender-name" class="form-input" placeholder="e.g. Your Name / Visitor" required>
+              </div>
+
+              <div class="form-group">
+                <label for="sender-email" class="form-label">Your Email Address</label>
+                <input type="email" id="sender-email" class="form-input" placeholder="e.g. visitor@example.com"
+                  required>
+              </div>
+
+              <div class="form-group">
+                <label for="message-subject" class="form-label">Subject</label>
+                <input type="text" id="message-subject" class="form-input"
+                  placeholder="Project Inquiry / Feedback / Collaboration" required>
+              </div>
+
+              <div class="form-group">
+                <label for="message-text" class="form-label">Message</label>
+                <textarea id="message-text" class="form-textarea" rows="4"
+                  placeholder="Write your message directly to Kishor Kumar K M..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn-send-message">
+                <span>Send Direct Message</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+
+              <!-- Feedback Confirmation Alert -->
+              <div class="message-feedback-box" id="message-feedback-box" role="status"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================================================================
+       8. Footer
+       ====================================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="brand-logo" style="font-size:1.25rem;">
+        Kishor Kumar K M • 25BIT026
+        <span class="brand-dot" aria-hidden="true"></span>
+      </div>
+      <p class="footer-copy">
+        Department of Information Technology • 2nd Year B.Sc IT Coursework Project.
+      </p>
+      <div class="footer-links">
+        <a href="#top">Back to top ↑</a>
+        <a href="#projects">Course Projects</a>
+        <a href="#education">Academics</a>
+        <a href="#contact">Contact &amp; Message</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================================
+       9. Academic Project Modal Dialog (<dialog>)
+       ====================================================================== -->
+  <dialog class="project-modal" id="project-modal" aria-labelledby="modal-title">
+    <div class="modal-inner">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <h3 id="modal-title">Project Title</h3>
+          <p id="modal-subtitle">Project Subtitle</p>
+        </div>
+        <button type="button" class="modal-close-btn" aria-label="Close project modal">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-banner">
+          <img id="modal-banner-img" src="assets/images/project-recipe.jpg" alt="Project preview screenshot"
+            loading="lazy">
+        </div>
+
+        <!-- Modal Tabs -->
+        <div class="modal-tabs">
+          <button type="button" class="modal-tab-btn active" data-tab="overview">Problem &amp; Objectives</button>
+          <button type="button" class="modal-tab-btn" data-tab="demo">Interactive Sandbox ⚡</button>
+          <button type="button" class="modal-tab-btn" data-tab="tech">Tech Stack &amp; Architecture</button>
+        </div>
+
+        <!-- Tab 1: Overview -->
+        <div class="tab-content active" id="tab-overview">
+          <div id="modal-overview-content"></div>
+        </div>
+
+        <!-- Tab 2: Live Viva Sandbox -->
+        <div class="tab-content" id="tab-demo">
+          <div id="modal-demo-container"></div>
+        </div>
+
+        <!-- Tab 3: Tech Stack & Architecture -->
+        <div class="tab-content" id="tab-tech">
+          <h4>Technologies &amp; Libraries Implemented</h4>
+          <div class="card-mini-tags" id="modal-tech-tags" style="justify-content: flex-start; margin: 1rem 0 1.5rem;">
+          </div>
+          <h4>Software Architecture &amp; Data Pipeline</h4>
+          <p style="font-size:0.92rem; color:var(--text-secondary); line-height:1.6;">
+            Constructed adhering to unidirectional data flow, modular separation of concerns (HTML layout, CSS design
+            tokens, JS functional logic), and zero external heavy bundle dependencies. Fully responsive across desktop
+            workstations and mobile devices.
+          </p>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Core JavaScript -->
+  <script src="js/main.js"></script>
 </body>
+
 </html>
